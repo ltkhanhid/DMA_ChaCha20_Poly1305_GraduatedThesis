@@ -1,0 +1,290 @@
+============================================================
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_verify.py --port COM8 --demo aead_dma
+
+============================================================
+  RISC-V SoC — FPGA Verification (RFC 8439)
+  Port: COM8  |  Baud: 115200  |  Mode: aead_dma
+============================================================
+  Ket noi COM8 thanh cong
+
+============================================================
+  AEAD ChaCha20-Poly1305 + DMA (RFC 8439 Section 2.8.2)
+============================================================
+
+[TX] Gui 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Da gui 64 bytes. Cho FPGA xu ly...
+
+  TIMEOUT: Chi nhan duoc 0/80 bytes sau 10s
+  -> Kiem tra: FPGA nap dung firmware? Da reset FPGA?
+
+  Da dong COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_interactive.py --port COM8 --demo aead --text "Hello RISC-V!"
+
+============================================================
+  FPGA Interactive Demo — AEAD CPU-only
+  Port: COM8  |  Baud: 115200
+============================================================
+  Ket noi COM8 thanh cong
+
+
+[TX] Gui 64 bytes:
+  "Hello RISC-V!"
+    0000: 48 65 6c 6c 6f 20 52 49 53 43 2d 56 21 20 20 20   Hello RISC-V!   
+    0010: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+    0020: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+    0030: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+
+  Da gui. Cho FPGA xu ly...
+
+  TIMEOUT: Nhan 0/80 bytes
+  -> Kiem tra: FPGA nap dung firmware? Reset FPGA?
+  Da dong COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_demo.py --port COM8 --demo ab_test
+Sử dụng plaintext mặc định: RFC 8439 test vector
+
+============================================================
+  RISC-V SoC — ChaCha20-Poly1305 AEAD Demo
+  Port: COM8  |  Baud: 115200  |  Mode: ab_test
+============================================================
+  ✓ Kết nối COM8 thành công
+
+############################################################
+  A/B TEST: CPU-only vs DMA-assisted AEAD
+############################################################
+
+[A] Nạp demo_aead.hex lên FPGA rồi nhấn Enter...
+  → Nhấn Enter khi FPGA sẵn sàng (7-seg hiện 0x0001): KienT
+
+============================================================
+  Demo AEAD ChaCha20-Poly1305 — CPU-only (RFC 8439 §2.8.2)
+============================================================
+
+[TX] Sending 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Sent 64 bytes. Waiting for response...
+  TIMEOUT: Chỉ nhận được 0/80 bytes sau 10s
+  → Kiểm tra: FPGA đã nạp đúng firmware (Demo AEAD ChaCha20-Poly1305 — CPU-only (RFC 8439 §2.8.2))? Reset FPGA?
+
+[B] Nạp demo_aead_dma.hex lên FPGA rồi nhấn Enter...
+  → Nhấn Enter khi FPGA sẵn sàng (7-seg hiện 0x0001): python fpga_verify.py --port COM8 --demo aead_dma
+
+============================================================
+  Demo AEAD ChaCha20-Poly1305 — DMA-assisted (RFC 8439 §2.8.2)
+============================================================
+
+[TX] Sending 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Sent 64 bytes. Waiting for response...
+  TIMEOUT: Chỉ nhận được 0/80 bytes sau 10s
+  → Kiểm tra: FPGA đã nạp đúng firmware (Demo AEAD ChaCha20-Poly1305 — DMA-assisted (RFC 8439 §2.8.2))? Reset FPGA?
+
+============================================================
+  A/B TEST RESULTS
+============================================================
+
+  Đã đóng COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_verify.py --port COM8 --demo aead_dma
+
+============================================================
+  RISC-V SoC — FPGA Verification (RFC 8439)
+  Port: COM8  |  Baud: 115200  |  Mode: aead_dma
+============================================================
+  Ket noi COM8 thanh cong
+
+============================================================
+  AEAD ChaCha20-Poly1305 + DMA (RFC 8439 Section 2.8.2)
+============================================================
+
+[TX] Gui 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Da gui 64 bytes. Cho FPGA xu ly...
+
+  TIMEOUT: Chi nhan duoc 0/80 bytes sau 10s
+  -> Kiem tra: FPGA nap dung firmware? Da reset FPGA?
+
+  Da dong COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_verify.py --port COM8 --demo aead_dma
+
+============================================================
+  RISC-V SoC — FPGA Verification (RFC 8439)
+  Port: COM8  |  Baud: 115200  |  Mode: aead_dma
+============================================================
+  Ket noi COM8 thanh cong
+
+============================================================
+  AEAD ChaCha20-Poly1305 + DMA (RFC 8439 Section 2.8.2)
+============================================================
+
+[TX] Gui 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Da gui 64 bytes. Cho FPGA xu ly...
+
+[RX] Nhan 80 bytes trong 117.3 ms:
+
+  Ciphertext (64 bytes):
+    0000: d3 1a 8d 34 64 8e 60 db 7b 86 af bc 53 ef 7e c2   ...4d.`.{...S.~.
+    0010: a4 ad ed 51 29 6e 08 fe a9 e2 b5 a7 36 ee 62 d6   ...Q)n......6.b.
+    0020: 3d be a4 5e 8c a9 67 12 82 fa fb 69 da 92 72 8b   =..^..g....i..r.
+    0030: 1a 71 de 0a 9e 06 0b 29 05 d6 a5 b6 7e cd 3b 36   .q.....)....~.;6
+
+  Tag (16 bytes):
+    0000: 57 72 8d 89 81 1f 44 e3 44 9f 0d 1c 25 a3 e9 5e   Wr....D.D...%..^
+
+[VERIFY] So sanh voi RFC 8439 expected:
+  Ciphertext: 64/64 bytes MATCH
+  Tag: 16/16 bytes MATCH
+
+  Thoi gian end-to-end : 117.3 ms
+  UART overhead (est)  : ~12.5 ms
+  Send delay (safety)  : ~64 ms
+  Crypto processing    : ~40.8 ms
+
+  >>> PASS — Ket qua dung RFC 8439 <<<
+
+  Da dong COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_interactive.py --port COM8 --demo aead --text "Hello RISC-V!"     
+
+============================================================
+  FPGA Interactive Demo — AEAD CPU-only
+  Port: COM8  |  Baud: 115200
+============================================================
+  Ket noi COM8 thanh cong
+
+
+[TX] Gui 64 bytes:
+  "Hello RISC-V!"
+    0000: 48 65 6c 6c 6f 20 52 49 53 43 2d 56 21 20 20 20   Hello RISC-V!   
+    0010: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+    0020: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+    0030: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+
+  Da gui. Cho FPGA xu ly...
+
+  TIMEOUT: Nhan 0/80 bytes
+  -> Kiem tra: FPGA nap dung firmware? Reset FPGA?
+  Da dong COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_interactive.py --port COM8 --demo aead --text "Hello RISC-V!"
+
+============================================================
+  FPGA Interactive Demo — AEAD CPU-only
+  Port: COM8  |  Baud: 115200
+============================================================
+  Ket noi COM8 thanh cong
+
+
+[TX] Gui 64 bytes:
+  "Hello RISC-V!"
+    0000: 48 65 6c 6c 6f 20 52 49 53 43 2d 56 21 20 20 20   Hello RISC-V!   
+    0010: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+    0020: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+    0030: 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+
+  Da gui. Cho FPGA xu ly...
+
+[RX] Nhan 80 bytes trong 114.3 ms:
+
+  Ciphertext (64 bytes):
+    0000: d7 1e 85 31 6e dd 12 f3 46 a1 a2 ad 17 a1 2a 8e   ...1n...F.....*.
+    0010: e1 e0 a8 1f 29 21 4e fe fd aa f0 a7 75 a2 23 85   ....)!N.....u.#.
+    0020: 6e be eb 18 8c ae 7e 0b 98 fa 92 2f da fb 72 c8   n.....~..../..r.
+    0030: 55 24 92 4e 9e 49 4d 6f 40 84 a5 ef 31 98 3b 79   U$.N.IMo@...1.;y
+
+  Tag (16 bytes):
+    0000: a4 5a 4d a6 fb 05 d4 20 08 e5 c7 b8 43 85 c1 3d   .ZM.... ....C..=
+
+[VERIFY]
+  Ciphertext: 64/64 bytes MATCH
+  Tag: 16/16 bytes MATCH
+
+  Thoi gian: 114.3 ms
+
+  >>> PASS <<<
+  Da dong COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_demo.py --port COM3 --demo ab_test                                                                
+Sử dụng plaintext mặc định: RFC 8439 test vector
+
+============================================================
+  RISC-V SoC — ChaCha20-Poly1305 AEAD Demo
+  Port: COM3  |  Baud: 115200  |  Mode: ab_test
+============================================================
+ERROR: Không mở được COM3: could not open port 'COM3': OSError(22, 'The semaphore timeout period has expired.', None, 121)
+  → Kiểm tra: cổng COM đúng chưa? FPGA đã nạp chương trình chưa?
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_demo.py --port COM8 --demo ab_test
+Sử dụng plaintext mặc định: RFC 8439 test vector
+
+============================================================
+  RISC-V SoC — ChaCha20-Poly1305 AEAD Demo
+  Port: COM8  |  Baud: 115200  |  Mode: ab_test
+============================================================
+  ✓ Kết nối COM8 thành công
+
+############################################################
+  A/B TEST: CPU-only vs DMA-assisted AEAD
+############################################################
+
+[A] Nạp demo_aead.hex lên FPGA rồi nhấn Enter...
+  → Nhấn Enter khi FPGA sẵn sàng (7-seg hiện 0x0001): hello
+
+============================================================
+  Demo AEAD ChaCha20-Poly1305 — CPU-only (RFC 8439 §2.8.2)
+============================================================
+
+[TX] Sending 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Sent 64 bytes. Waiting for response...
+  TIMEOUT: Chỉ nhận được 0/80 bytes sau 10s
+  → Kiểm tra: FPGA đã nạp đúng firmware (Demo AEAD ChaCha20-Poly1305 — CPU-only (RFC 8439 §2.8.2))? Reset FPGA?
+
+[B] Nạp demo_aead_dma.hex lên FPGA rồi nhấn Enter...
+  → Nhấn Enter khi FPGA sẵn sàng (7-seg hiện 0x0001): 
+Đã hủy bởi người dùng.
+
+  Đã đóng COM8.
+PS D:\TAILIEU\chuyenngnah\DATN\RTL\02_test> python fpga_demo.py --port COM8 --demo ab_test
+Sử dụng plaintext mặc định: RFC 8439 test vector
+
+============================================================
+  RISC-V SoC — ChaCha20-Poly1305 AEAD Demo
+  Port: COM8  |  Baud: 115200  |  Mode: ab_test
+============================================================
+  ✓ Kết nối COM8 thành công
+
+############################################################
+  A/B TEST: CPU-only vs DMA-assisted AEAD
+############################################################
+
+[A] Nạp demo_aead.hex lên FPGA rồi nhấn Enter...
+  → Nhấn Enter khi FPGA sẵn sàng (7-seg hiện 0x0001): hi
+
+============================================================
+  Demo AEAD ChaCha20-Poly1305 — CPU-only (RFC 8439 §2.8.2)
+============================================================
+
+[TX] Sending 64 bytes plaintext:
+  "Ladies and Gentlemen of the class of '99: If I could offer you o"
+  Sent 64 bytes. Waiting for response...
+
+[RX] Received 80 bytes in 116.1 ms:
+
+  Ciphertext (64 bytes):
+  0000: d3 1a 8d 34 64 8e 60 db 7b 86 af bc 53 ef 7e c2   ...4d.`.{...S.~.
+  0010: a4 ad ed 51 29 6e 08 fe a9 e2 b5 a7 36 ee 62 d6   ...Q)n......6.b.
+  0020: 3d be a4 5e 8c a9 67 12 82 fa fb 69 da 92 72 8b   =..^..g....i..r.
+  0030: 1a 71 de 0a 9e 06 0b 29 05 d6 a5 b6 7e cd 3b 36   .q.....)....~.;6
+
+  Tag (16 bytes):
+  0000: 57 72 8d 89 81 1f 44 e3 44 9f 0d 1c 25 a3 e9 5e   Wr....D.D...%..^
+
+[VERIFY] So sánh với expected (tính từ firmware key/nonce):
+  Ciphertext: 64/64 bytes MATCH ✓
+  Tag: 16/16 bytes MATCH ✓
+
+  ⏱  Thời gian end-to-end: 116.1 ms
+  ⏱  UART overhead (TX+RX): ~12.5 ms
+  ⏱  Send delay (safety): ~64 ms
+  ⏱  Crypto processing (est): ~39.6 ms
+
+  ✓ PASS — Kết quả đúng
+
+[B] Nạp demo_aead_dma.hex lên FPGA rồi nhấn Enter...

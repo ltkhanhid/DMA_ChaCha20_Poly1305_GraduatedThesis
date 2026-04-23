@@ -1,0 +1,129 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+!s11f vlog 2024.1 2024.02, Feb  1 2024
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z2 dD:/TAILIEU/chuyenngnah/DATN/RTL/000_tlul/sim
+T_opt
+!s110 1769308774
+VoULN9E@A@zaSeV:lQ=M4k1
+04 6 4 work spi_tb fast 0
+=1-f8b54d90d981-69758265-2db-5818
+R1
+!s12f OEM100
+!s12b OEM100
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work_spi
+Z3 tCvgOpt 0
+n@_opt
+OL;O;2024.1;79
+vspi_master
+Z4 2../tlul_pkg.sv|../spi_master.sv|../tlul_spi.sv|../tb/spi_tb.sv
+Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z6 !s110 1769308751
+!i10b 1
+!s100 Y_Z<`9fSddZ[<z@1^nMo^2
+I`ggHWji3OU76A>]XSjFJG0
+S1
+R2
+w1769308011
+8../spi_master.sv
+F../spi_master.sv
+!i122 1
+L0 6 221
+Z7 VDg1SIo80bB@j0V0VzS_@n1
+Z8 OL;L;2024.1;79
+r1
+!s85 0
+31
+Z9 !s108 1769308751.000000
+Z10 !s107 ../tb/spi_tb.sv|../tlul_spi.sv|../spi_master.sv|../tlul_pkg.sv|
+Z11 !s90 -work|work_spi|+acc|-sv|../tlul_pkg.sv|../spi_master.sv|../tlul_spi.sv|../tb/spi_tb.sv|
+!i113 0
+Z12 o-work work_spi +acc -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
+vspi_tb
+R4
+R5
+R6
+!i10b 1
+!s100 K;TIRKI=<hab:1<Z=LW4G0
+I2_TILVzG@oGnWT=2?Q[nI3
+S1
+R2
+w1769308101
+8../tb/spi_tb.sv
+F../tb/spi_tb.sv
+!i122 1
+L0 8 456
+R7
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
+Xtlul_pkg
+R4
+R5
+R6
+!i10b 1
+!s100 XTL^O:PDRl4Pif_OIVcVo3
+I_NBSlPC55Nh=_NL0UMh4X2
+S1
+R2
+w1765736915
+8../tlul_pkg.sv
+F../tlul_pkg.sv
+!i122 1
+L0 1 0
+V_NBSlPC55Nh=_NL0UMh4X2
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
+vtlul_spi
+R4
+R5
+DXx4 work 8 tlul_pkg 0 22 _NBSlPC55Nh=_NL0UMh4X2
+R6
+!i10b 1
+!s100 J]Lm>@JMP[h1Kjc@g:XUY3
+I@<Ac32@JdeYPPIXObhoQB2
+S1
+R2
+w1769308746
+8../tlul_spi.sv
+F../tlul_spi.sv
+!i122 1
+L0 13 218
+R7
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3

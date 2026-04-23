@@ -1,0 +1,12 @@
+BEGIN 1:i2c_master:fast:work_i2c
+    ack_error_q :  1:i2c_tb:fast:work_i2c
+END 
+BEGIN 1:tlul_i2c:fast:work_i2c
+    i2c_start_req :  1:i2c_tb:fast:work_i2c
+    i2c_busy :  1:i2c_tb:fast:work_i2c
+    i2c_start :  1:i2c_tb:fast:work_i2c
+    i2c_ack_error :  1:i2c_tb:fast:work_i2c
+END 
+BEGIN_UNRESOLVED_HREF
+ 1:i2c_tb:fast:work_i2c
+END_UNRESOLVED_HREF

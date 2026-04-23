@@ -1,0 +1,74 @@
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_xbar_2m6s:u_crossbar|arb_state
+Name arb_state.ARB_IDLE arb_state.ARB_DMA arb_state.ARB_CPU 
+arb_state.ARB_IDLE 0 0 0 
+arb_state.ARB_CPU 1 0 1 
+arb_state.ARB_DMA 1 1 0 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_chacha20:u_chacha20|chacha20_core:u_core|fsm_q
+Name fsm_q.S_VALID fsm_q.S_ADD fsm_q.S_ROUND fsm_q.S_IDLE 
+fsm_q.S_IDLE 0 0 0 0 
+fsm_q.S_ROUND 0 0 1 1 
+fsm_q.S_ADD 0 1 0 1 
+fsm_q.S_VALID 1 0 0 1 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_uart_bridge:u_uart_bridge|uart_rx_8bit:u_rx|state_q
+Name state_q.IDLE state_q.STOP state_q.RECEIVING 
+state_q.IDLE 0 0 0 
+state_q.RECEIVING 1 0 1 
+state_q.STOP 1 1 0 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_uart_bridge:u_uart_bridge|uart_tx_8bit:u_tx|state_q
+Name state_q.IDLE state_q.DONE state_q.SENDING 
+state_q.IDLE 0 0 0 
+state_q.SENDING 1 0 1 
+state_q.DONE 1 1 0 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_adapter_mem:u_mem_adapter|state_q
+Name state_q.RESPOND 
+state_q.IDLE 0 
+state_q.RESPOND 1 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_poly1305:u_poly1305|poly1305_core:u_core|state_q
+Name state_q.S_REDUCE2 state_q.S_VALID state_q.S_FINAL state_q.S_REDUCE state_q.S_MULT state_q.S_IDLE 
+state_q.S_IDLE 0 0 0 0 0 0 
+state_q.S_MULT 0 0 0 0 1 1 
+state_q.S_REDUCE 0 0 0 1 0 1 
+state_q.S_FINAL 0 0 1 0 0 1 
+state_q.S_VALID 0 1 0 0 0 1 
+state_q.S_REDUCE2 1 0 0 0 0 1 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_dma:u_dma|dma_controller:u_dma_controller|dma_channel:u_ch1|state_q
+Name state_q.CH_ERROR state_q.CH_DONE state_q.CH_NEXT state_q.CH_WRITE state_q.CH_READ state_q.CH_WAIT state_q.CH_IDLE 
+state_q.CH_IDLE 0 0 0 0 0 0 0 
+state_q.CH_WAIT 0 0 0 0 0 1 1 
+state_q.CH_READ 0 0 0 0 1 0 1 
+state_q.CH_WRITE 0 0 0 1 0 0 1 
+state_q.CH_NEXT 0 0 1 0 0 0 1 
+state_q.CH_DONE 0 1 0 0 0 0 1 
+state_q.CH_ERROR 1 0 0 0 0 0 1 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_dma:u_dma|dma_controller:u_dma_controller|dma_channel:u_ch0|state_q
+Name state_q.CH_ERROR state_q.CH_DONE state_q.CH_NEXT state_q.CH_WRITE state_q.CH_READ state_q.CH_WAIT state_q.CH_IDLE 
+state_q.CH_IDLE 0 0 0 0 0 0 0 
+state_q.CH_WAIT 0 0 0 0 0 1 1 
+state_q.CH_READ 0 0 0 0 1 0 1 
+state_q.CH_WRITE 0 0 0 1 0 0 1 
+state_q.CH_NEXT 0 0 1 0 0 0 1 
+state_q.CH_DONE 0 1 0 0 0 0 1 
+state_q.CH_ERROR 1 0 0 0 0 0 1 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|tlul_dma:u_dma|dma_controller:u_dma_controller|dma_tlul_master:u_bus_master|state_q
+Name state_q.BUS_ERROR state_q.BUS_WRITE_RSP state_q.BUS_WRITE_REQ state_q.BUS_READ_RSP state_q.BUS_READ_REQ state_q.BUS_IDLE 
+state_q.BUS_IDLE 0 0 0 0 0 0 
+state_q.BUS_READ_REQ 0 0 0 0 1 1 
+state_q.BUS_READ_RSP 0 0 0 1 0 1 
+state_q.BUS_WRITE_REQ 0 0 1 0 0 1 
+state_q.BUS_WRITE_RSP 0 1 0 0 0 1 
+state_q.BUS_ERROR 1 0 0 0 0 1 
+
+State Machine - |soc_top_fpga|soc_top_2m6s:u_soc|pipelined_tl:u_cpu|MEM_tl:MEM_tl_inst|tlul_host_adapter:u_host_adapter|state_q
+Name state_q.IDLE state_q.REQ_SEND state_q.ACTIVE 
+state_q.IDLE 0 0 0 
+state_q.ACTIVE 1 0 1 
+state_q.REQ_SEND 1 1 0 

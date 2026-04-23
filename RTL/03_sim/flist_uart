@@ -1,0 +1,85 @@
+-sv
+-timescale 1ns/100ps
+
+# TileLink Package
+../000_tlul/tlul_pkg.sv
+
+# TileLink Infrastructure
+../000_tlul/tlul_host_adapter.sv
+../000_tlul/tlul_xbar_3s.sv
+../000_tlul/tlul_adapter_mem.sv
+../000_tlul/tlul_adapter_peri.sv
+
+# UART Modules
+../000_tlul/uart_byte_tx.sv
+../000_tlul/uart_byte_rx.sv
+../000_tlul/tlul_uart_bridge.sv
+
+# TileLink Pipeline Registers (with stall support)
+../000_tlul/EX_MEM_reg_tl.sv
+../000_tlul/MEM_WB_reg_tl.sv
+
+# Core Source
+../00_src/alu.sv
+../00_src/brc.sv
+../00_src/branch_predictor.sv
+../00_src/cla_4bit.sv
+../00_src/cla_32bit.sv
+../00_src/control_logic.sv
+../00_src/fa.sv
+../00_src/forwarding_unit.sv
+../00_src/hazard_detection.sv
+../00_src/immgen.sv
+../00_src/instr_mem.sv
+../00_src/memory.sv
+../00_src/mux2.sv
+../00_src/mux3.sv
+../00_src/mux3_wb.sv
+../00_src/mux4.sv
+../00_src/mux4_fw.sv
+../00_src/pc.sv
+../00_src/PCplus4.sv
+../00_src/peripherals.sv
+../00_src/regfile.sv
+../00_src/SevenSegment.sv
+
+# Pipeline Stages
+../00_src/IF.sv
+../00_src/IF_ID_reg.sv
+../00_src/ID.sv
+../00_src/ID_EX_reg.sv
+../00_src/EX.sv
+../00_src/WB.sv
+
+# TileLink MEM Stage and Pipeline
+../000_tlul/MEM_tl.sv
+../000_tlul/ID_EX_reg_tl.sv
+../000_tlul/hazard_detection_tl.sv
+../000_tlul/pipelined_tl.sv
+
+# TileLink Crossbar 2M6S
+../000_tlul/tlul_xbar_2m6s.sv
+
+# SPI and I2C
+../000_tlul/spi_master.sv
+../000_tlul/tlul_spi.sv
+../000_tlul/i2c_master.sv
+../000_tlul/tlul_i2c.sv
+
+# DMA Controller (modular)
+../000_tlul/dma/dma_channel.sv
+../000_tlul/dma/dma_arbiter.sv
+../000_tlul/dma/dma_tlul_master.sv
+../000_tlul/dma/dma_controller.sv
+../000_tlul/dma/tlul_dma.sv
+
+# ChaCha20 Crypto Peripheral
+../000_tlul/chacha20/chacha20_qr.sv
+../000_tlul/chacha20/chacha20_core.sv
+../000_tlul/chacha20/tlul_chacha20.sv
+
+# SOC Top (2M6S with DMA)
+../000_tlul/soc_top_2m6s.sv
+
+# Testbench - UART 7-Segment Test
+../000_tlul/tb/soc_7seg_tb.sv

@@ -1,0 +1,214 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run -all; quit -f" soc_aead_tb 
+# Start time: 23:28:49 on Mar 31,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tlul_pkg(fast)
+# Loading work.soc_aead_tb(fast)
+# Loading work.soc_top_2m6s(fast)
+# Loading work.pipelined_tl(fast)
+# Loading work.IF(fast)
+# Loading work.PCplus4(fast)
+# Loading work.pc(fast)
+# Loading work.instr_mem(fast)
+# Loading work.IF_ID_reg(fast)
+# Loading work.ID(fast)
+# Loading work.regfile(fast)
+# Loading work.ImmGen(fast)
+# Loading work.control_logic(fast)
+# Loading work.ID_EX_reg_tl(fast)
+# Loading work.EX(fast)
+# Loading work.mux2(fast)
+# Loading work.mux4_fw(fast)
+# Loading work.alu(fast)
+# Loading work.brc(fast)
+# Loading work.EX_MEM_reg_tl(fast)
+# Loading work.MEM_tl(fast)
+# Loading work.tlul_host_adapter(fast)
+# Loading work.MEM_WB_reg_tl(fast)
+# Loading work.WB(fast)
+# Loading work.mux3_wb(fast)
+# Loading work.hazard_detection_tl(fast)
+# Loading work.forwarding_unit(fast)
+# Loading work.tlul_xbar_2m6s(fast)
+# Loading work.tlul_adapter_mem(fast)
+# Loading work.memory(fast)
+# Loading work.tlul_adapter_peri(fast)
+# Loading work.peripherals(fast)
+# Loading work.SevenSegment(fast)
+# Loading work.tlul_uart_bridge(fast)
+# Loading work.uart_tx_8bit(fast)
+# Loading work.uart_rx_8bit(fast)
+# Loading work.tlul_dma(fast)
+# Loading work.dma_controller(fast)
+# Loading work.dma_channel(fast)
+# Loading work.dma_channel(fast__1)
+# Loading work.dma_arbiter(fast)
+# Loading work.dma_tlul_master(fast)
+# Loading work.tlul_chacha20(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# Loading work.tlul_poly1305(fast)
+# Loading work.poly1305_core(fast)
+# run -all
+# 
+# ================================================================
+#  AEAD CHACHA20-POLY1305  SoC Demo  (RFC 8439 Section 2.8)
+# ================================================================
+# 
+#  INPUT PARAMETERS:
+#    Key   : 80 81 82 83 84 85 86 87 88 89 8a 8b 8c 8d 8e 8f
+#            90 91 92 93 94 95 96 97 98 99 9a 9b 9c 9d 9e 9f
+#    Nonce : 07 00 00 00 40 41 42 43 44 45 46 47
+#    AAD   : 50 51 52 53 c0 c1 c2 c3 c4 c5 c6 c7  (12 bytes)
+# 
+#  PLAINTEXT (64 bytes):
+#      0: 4c 61 64 69 65 73 20 61 6e 64 20 47 65 6e 74 6c  |Ladies and Gentl|
+#     16: 65 6d 65 6e 20 6f 66 20 74 68 65 20 63 6c 61 73  |emen of the clas|
+#     32: 73 20 6f 66 20 27 39 39 3a 20 49 66 20 49 20 63  |s of '99: If I c|
+#     48: 6f 75 6c 64 20 6f 66 66 65 72 20 79 6f 75 20 6f  |ould offer you o|
+# 
+#  AEAD Flow: OTK(ctr=0) -> Encrypt(ctr=1) -> MAC(6 blocks) -> Tag
+#  UART: 115200 baud | TX: 80 bytes (64 CT + 16 TAG)
+# ================================================================
+# 
+# [390000] Reset released.
+# [410000] Phase update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 ]
+# [850000] Phase update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 ]
+# 
+# --- Computing reference AEAD values (parallel with DUT) ---
+#   [REF] Computing reference AEAD values...
+#   [REF] OTK r = 8455e9a4557ab609af47b42d252bac7b
+#   [REF] OTK s = ff53d53e7875932aebd9751073d6e10a
+#   [REF] Ciphertext computed (64 bytes)
+#   [REF] Tag = 5ee9a3251c0d9f44e3441f81898d7257
+#   [REF] Reference computation complete.
+# 
+# --- Sending 64 plaintext bytes via UART (115200 baud) ---
+#   [UART-TX] byte[ 0]: 0x4c  'L'
+#   [UART-TX] byte[ 1]: 0x61  'a'
+#   [UART-TX] byte[ 2]: 0x64  'd'
+#   [UART-TX] byte[ 3]: 0x69  'i'
+#   [UART-TX] ... sending bytes 4-59 ...
+#   [UART-TX] byte[60]: 0x6f  'o'
+#   [UART-TX] byte[61]: 0x75  'u'
+#   [UART-TX] byte[62]: 0x20  ' '
+#   [UART-TX] byte[63]: 0x6f  'o'
+# [6141010000] Phase update:
+#   7-SEG: [ 0 | 0 | 4 | 0 | 0 | 0 | 0 | 2 ]
+# [6143450000] Phase update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 ]
+# [6145090000] Phase update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 ]
+# [6153350000] All 64 plaintext bytes sent. Duration: 6110720 ns
+# 
+# --- Waiting for firmware AEAD processing + UART TX output ---
+# [6155730000] Phase update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 ]
+# [6164750000] Phase update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 ]
+#   [UART-CAP] byte[ 0]: 0xd3   (CT)
+#   [UART-CAP] byte[ 1]: 0x1a   (CT)
+#   [UART-CAP] byte[ 2]: 0x8d   (CT)
+#   [UART-CAP] byte[ 3]: 0x34   (CT)
+#   [UART-CAP] ... capturing CT bytes 4-59 ...
+#   [UART-CAP] byte[16]: 0xa4   (CT)
+#   [UART-CAP] byte[32]: 0x3d   (CT)
+#   [UART-CAP] byte[48]: 0x1a   (CT)
+#   [UART-CAP] byte[60]: 0x7e   (CT)
+#   [UART-CAP] byte[61]: 0xcd   (CT)
+#   [UART-CAP] byte[62]: 0x3b   (CT)
+#   [UART-CAP] byte[63]: 0x36   (CT)
+#   [UART-CAP] byte[64]: 0x57  (TAG)
+#   [UART-CAP] byte[65]: 0x72  (TAG)
+#   [UART-CAP] byte[66]: 0x8d  (TAG)
+#   [UART-CAP] byte[67]: 0x89  (TAG)
+#   [UART-CAP] byte[68]: 0x81  (TAG)
+#   [UART-CAP] byte[69]: 0x1f  (TAG)
+#   [UART-CAP] byte[70]: 0x44  (TAG)
+#   [UART-CAP] byte[71]: 0xe3  (TAG)
+#   [UART-CAP] byte[72]: 0x44  (TAG)
+#   [UART-CAP] byte[73]: 0x9f  (TAG)
+#   [UART-CAP] byte[74]: 0x0d  (TAG)
+#   [UART-CAP] byte[75]: 0x1c  (TAG)
+#   [UART-CAP] byte[76]: 0x25  (TAG)
+#   [UART-CAP] byte[77]: 0xa3  (TAG)
+#   [UART-CAP] byte[78]: 0xe9  (TAG)
+#   [UART-CAP] byte[79]: 0x5e  (TAG)
+# [13144450000] All 80 bytes captured from UART TX.
+# [13149130000] Phase update:
+#   7-SEG: [ 0 | 0 | 5 | 0 | A | E | A | d ]
+# [13244450000] Processing + UART TX duration: 6991100 ns
+# 
+#   7-SEG: [ A | E | A | d | A | E | A | d ]
+# 
+# ================================================================
+#  SoC OUTPUT (captured from UART TX):
+# ================================================================
+# 
+#  CIPHERTEXT (64 bytes):
+#      0: d3 1a 8d 34 64 8e 60 db 7b 86 af bc 53 ef 7e c2
+#     16: a4 ad ed 51 29 6e 08 fe a9 e2 b5 a7 36 ee 62 d6
+#     32: 3d be a4 5e 8c a9 67 12 82 fa fb 69 da 92 72 8b
+#     48: 1a 71 de 0a 9e 06 0b 29 05 d6 a5 b6 7e cd 3b 36
+# 
+#  TAG (16 bytes):
+#    57 72 8d 89 81 1f 44 e3 44 9f 0d 1c 25 a3 e9 5e
+# 
+# ================================================================
+#  VERIFICATION
+# ================================================================
+# 
+#  Ciphertext vs RFC 8439 Section 2.8.2 expected (first 64 bytes):
+#    All 64 ciphertext bytes match RFC expected values.
+# 
+#  Tag vs reference model:
+#    SoC tag = 5ee9a3251c0d9f44e3441f81898d7257
+#    Ref tag = 5ee9a3251c0d9f44e3441f81898d7257
+#    Tag MATCH!
+# 
+#  Side-by-side (first 16 bytes):
+#    Plaintext : 4c 61 64 69 65 73 20 61 6e 64 20 47 65 6e 74 6c
+#    Ciphertext: d3 1a 8d 34 64 8e 60 db 7b 86 af bc 53 ef 7e c2
+#    Expected  : d3 1a 8d 34 64 8e 60 db 7b 86 af bc 53 ef 7e c2
+# 
+# ================================================================
+#  RESULT: CT 64/64 PASS  |  TAG 1/1 PASS  >>> ALL CORRECT <<<
+# 
+#  Full AEAD pipeline verified end-to-end:
+#    Host -> UART RX -> Firmware AEAD:
+#      1. ChaCha20(key,nonce,ctr=0) -> OTK generation
+#      2. Poly1305 init with OTK (r,s)
+#      3. ChaCha20(key,nonce,ctr=1) XOR PT -> ciphertext
+#      4. Poly1305 MAC(AAD|pad|CT|lengths) -> finalize -> tag
+#    Firmware -> UART TX -> Host (64B CT + 16B TAG)
+# 
+#  Peripherals exercised: UART, ChaCha20, Poly1305, 7-Segment
+# ================================================================
+# 
+# ** Note: $stop    : ../000_tlul/tb/soc_aead_tb.sv(717)
+#    Time: 13244450 ns  Iteration: 1  Instance: /soc_aead_tb
+# Break in Module soc_aead_tb at ../000_tlul/tb/soc_aead_tb.sv line 717
+# Stopped at ../000_tlul/tb/soc_aead_tb.sv line 717
+#  quit -f
+# End time: 23:29:01 on Mar 31,2026, Elapsed time: 0:00:12
+# Errors: 0, Warnings: 0

@@ -1,0 +1,42 @@
+-sv
+-timescale 1ns/100ps
+
+# SOURCE CODE FILES
+./../00_src/alu.sv
+./../00_src/brc.sv
+./../00_src/cla_32bit.sv
+./../00_src/cla_4bit.sv
+./../00_src/control_logic.sv
+./../00_src/EX_MEM_reg.sv
+./../00_src/EX.sv
+./../00_src/fa.sv
+./../00_src/forwarding_unit.sv
+./../00_src/hazard_detection.sv
+./../00_src/ID_EX_reg.sv
+./../00_src/ID.sv
+./../00_src/IF_ID_reg.sv
+./../00_src/IF.sv
+./../00_src/immgen.sv
+./../00_src/instr_mem.sv
+./../00_src/lsu.sv
+./../00_src/memory.sv
+./../00_src/MEM.sv
+./../00_src/MEM_WB_reg.sv
+./../00_src/mux2.sv
+./../00_src/mux3.sv
+./../00_src/mux3_wb.sv
+./../00_src/mux4_fw.sv
+./../00_src/mux4.sv
+./../00_src/PCplus4.sv
+./../00_src/pc.sv
+./../00_src/peripherals.sv
+./../00_src/pipelined.sv
+./../00_src/regfile.sv
+./../00_src/SevenSegment.sv
+./../00_src/WB.sv
+
+# TESTBENCH FILES
+./../01_bench/driver.sv
+./../01_bench/scoreboard.sv
+./../01_bench/tbench.sv
+./../01_bench/tlib.svh

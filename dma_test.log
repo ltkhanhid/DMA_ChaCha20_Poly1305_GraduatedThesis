@@ -1,0 +1,7 @@
+# vsim -c -l dma_test.log -do "run -all; quit -f" work.soc_dma_tb 
+# Start time: 19:36:53 on Mar 09,2026
+# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 19:36:54 on Mar 09,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

@@ -1,0 +1,6 @@
+-sv
+-timescale 1ns/100ps
+
+# Poly1305 MAC core testbench
+../000_tlul/poly1305/poly1305_core.sv
+../000_tlul/poly1305/poly1305_tb.sv

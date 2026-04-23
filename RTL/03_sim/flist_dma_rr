@@ -1,0 +1,13 @@
+-sv
+-timescale 1ns/100ps
+
+# DMA round-robin arbitration dedicated testbench
+# Tests: TC1 equal-simultaneous, TC2 unequal, TC3 staggered,
+#        TC4 single-channel, TC5 restart-during-concurrent
+../000_tlul/tlul_pkg.sv
+../000_tlul/dma/dma_channel.sv
+../000_tlul/dma/dma_arbiter.sv
+../000_tlul/dma/dma_tlul_master.sv
+../000_tlul/dma/dma_controller.sv
+../000_tlul/dma/tlul_dma.sv
+../000_tlul/dma/dma_rr_tb.sv

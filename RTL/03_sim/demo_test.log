@@ -1,0 +1,128 @@
+# vsim -c -l demo_test.log -do "run -all; quit -f" work.soc_demo_tb 
+# Start time: 23:32:05 on Mar 05,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/tb/soc_demo_tb.sv(66): (vopt-2685) [TFMPC] - Too few port connections for 'u_soc'.  Expected 32, found 31.
+# ** Warning: ../000_tlul/tb/soc_demo_tb.sv(66): (vopt-2718) [TFMPC] - Missing connection for port 'irq_poly_o'.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=4.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tlul_pkg(fast)
+# Loading work.soc_demo_tb(fast)
+# run -all
+# 
+# ================================================================
+#  SOC FULL DEMO: UART -> DMA -> ChaCha20 -> DMA -> UART
+#  Test Vector: RFC 8439 Sec 2.4.2 Sunscreen (64-byte block 1)
+#  Key  : 00:01:02:...1e:1f  Nonce: ...00:4a:00:00:00:00
+#  Counter = 1  |  Baud = 115200  |  Clock = 50 MHz
+# ================================================================
+# 
+# [390000] Reset released.
+# [410000] Phase Update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 ]
+# [810000] Phase Update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 ]
+# 
+# --- Phase 1: Sending 64 plaintext bytes via UART (115200) ---
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 ]
+#   [40390000] UART -> SoC byte[ 0]: 0x4c ('L')
+#   [135870000] UART -> SoC byte[ 1]: 0x61 ('a')
+#   [231350000] UART -> SoC byte[ 2]: 0x64 ('d')
+#   [326830000] UART -> SoC byte[ 3]: 0x69 ('i')
+#   ... (sending bytes 4-59) ...
+#   [5769190000] UART -> SoC byte[60]: 0x6f ('o')
+#   [5864670000] UART -> SoC byte[61]: 0x75 ('u')
+#   [5960150000] UART -> SoC byte[62]: 0x20 (' ')
+#   [6055630000] UART -> SoC byte[63]: 0x6f ('o')
+# [6138810000] Phase Update:
+#   7-SEG: [ 0 | 0 | 4 | 0 | 0 | 0 | 0 | 2 ]
+# [6140330000] Phase Update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 ]
+# [6145250000] Phase Update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 ]
+# [6151110000] All 64 bytes sent. UART RX duration: 6110720 ns (305536 cycles)
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 ]
+# 
+# --- Waiting for firmware processing + UART TX output... ---
+# [6185430000] Phase Update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 ]
+# [6190470000] Phase Update:
+#   7-SEG: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 ]
+#   [6273450000] Captured TX byte[ 0]: 0x6e
+#   [6360750000] Captured TX byte[ 1]: 0x2e
+#   [6448050000] Captured TX byte[ 2]: 0x35
+#   [6535350000] Captured TX byte[ 3]: 0x9a
+#   ... (capturing bytes 4-59) ...
+#   [7670250000] Captured TX byte[16]: 0xe9
+#   [9067050000] Captured TX byte[32]: 0xf9
+#   [10463850000] Captured TX byte[48]: 0x16
+#   [11511450000] Captured TX byte[60]: 0x9f
+#   [11598750000] Captured TX byte[61]: 0x08
+#   [11686050000] Captured TX byte[62]: 0x61
+#   [11773350000] Captured TX byte[63]: 0xd8
+# [11773350000] All 64 ciphertext bytes captured from UART TX.
+# [11778030000] Phase Update:
+#   7-SEG: [ 0 | 0 | 4 | 0 | C | A | F | E ]
+# [11873350000] Processing + UART TX duration: 5622240 ns (281112 cycles)
+# 
+#   7-SEG: [ C | A | F | E | C | A | F | E ]
+# 
+# ================================================================
+#   VERIFICATION: Received ciphertext vs RFC 8439 expected
+# ================================================================
+#   Byte[ 0]: Exp=0x6e Got=0x6e  PASS
+#   Byte[ 1]: Exp=0x2e Got=0x2e  PASS
+#   Byte[ 2]: Exp=0x35 Got=0x35  PASS
+#   Byte[ 3]: Exp=0x9a Got=0x9a  PASS
+#   ... (bytes 4-59 checking) ...
+#   Byte[60]: Exp=0x9f Got=0x9f  PASS
+#   Byte[61]: Exp=0x08 Got=0x08  PASS
+#   Byte[62]: Exp=0x61 Got=0x61  PASS
+#   Byte[63]: Exp=0xd8 Got=0xd8  PASS
+# 
+#   Plaintext  (first 16): 4c 61 64 69 65 73 20 61 6e 64 20 47 65 6e 74 6c
+#   Ciphertext (first 16): 6e 2e 35 9a 25 68 f9 80 41 ba 07 28 dd 0d 69 81
+#   Expected   (first 16): 6e 2e 35 9a 25 68 f9 80 41 ba 07 28 dd 0d 69 81
+# 
+# ================================================================
+#   RESULT: 64/64 PASS  *** ALL BYTES CORRECT ***
+# 
+#   Full data pipeline verified:
+#     Host UART TX -> SoC UART RX -> DMEM buffer
+#     -> DMA CH0 -> ChaCha20 PLAINTEXT registers
+#     -> ChaCha20 encrypt (RFC 8439)
+#     -> DMA CH0 -> DMEM buffer
+#     -> SoC UART TX -> Host UART RX
+# 
+#   Peripherals exercised: UART, DMA, ChaCha20, 7-Segment LED
+# ================================================================
+# 
+#   Timing Summary:
+#     UART RX (64 bytes):       305536 cycles
+#     Processing + UART TX:     281112 cycles
+#     Total simulation time:    11873350 ns
+# 
+# ** Note: $stop    : ../000_tlul/tb/soc_demo_tb.sv(416)
+#    Time: 11873350 ns  Iteration: 1  Instance: /soc_demo_tb
+# Break at ../000_tlul/tb/soc_demo_tb.sv line 416
+# Stopped at ../000_tlul/tb/soc_demo_tb.sv line 416
+#  quit -f
+# End time: 23:32:10 on Mar 05,2026, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 4

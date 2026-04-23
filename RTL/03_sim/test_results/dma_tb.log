@@ -1,0 +1,429 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run 100us; quit -f" dma_tb 
+# Start time: 22:40:47 on Apr 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_tb(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_tlul_master(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast__1)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.dma_tb(fast)
+# Loading work.tlul_pkg(fast)
+# Loading work.tlul_dma(fast)
+# Loading work.dma_controller(fast)
+# Loading work.dma_channel(fast)
+# Loading work.dma_channel(fast__1)
+# Loading work.dma_arbiter(fast)
+# Loading work.dma_tlul_master(fast)
+# run 100us
+# 
+# [DMA_TB] @190 ns | ################################################################
+# [DMA_TB] @190 ns | #                                                              #
+# [DMA_TB] @190 ns | #   DMA Controller - Comprehensive Verification Testbench     #
+# [DMA_TB] @190 ns | #   Module Under Test: tlul_dma (modular DMA controller)      #
+# [DMA_TB] @190 ns | #                                                              #
+# [DMA_TB] @190 ns | #   Sub-modules: dma_controller, dma_channel x2,              #
+# [DMA_TB] @190 ns | #                dma_arbiter (round-robin), dma_tlul_master    #
+# [DMA_TB] @190 ns | #                                                              #
+# [DMA_TB] @190 ns | #   Bus Protocol: TileLink Uncached Lightweight (TL-UL)       #
+# [DMA_TB] @190 ns | #   Clock Period: 20 ns (50 MHz)                               #
+# [DMA_TB] @190 ns | #   Memory Size:  256 words (1024 bytes)                         #
+# [DMA_TB] @190 ns | #                                                              #
+# [DMA_TB] @190 ns | #   Test Plan:                                                #
+# [DMA_TB] @190 ns | #     1. Register R/W        - all config registers           #
+# [DMA_TB] @190 ns | #     2. Memory-to-Memory    - CH0, 8 words sequential        #
+# [DMA_TB] @190 ns | #     3. No-Increment Fill   - fixed src, incrementing dst    #
+# [DMA_TB] @190 ns | #     4. Channel 1           - independent CH1 operation      #
+# [DMA_TB] @190 ns | #     5. Dual-Channel        - concurrent CH0+CH1, RR arb    #
+# [DMA_TB] @190 ns | #     6. Error Injection     - d_denied -> DMA_ERROR state    #
+# [DMA_TB] @190 ns | #     7. Back-to-Back        - disable, reconfig, re-enable   #
+# [DMA_TB] @190 ns | #     8. Large Transfer      - CH0, 64 words, counter check   #
+# [DMA_TB] @190 ns | #     9. Sequential Dual-Ch  - CH0 done, SW enables CH1       #
+# [DMA_TB] @190 ns | #                                                              #
+# [DMA_TB] @190 ns | ################################################################
+# 
+# [DMA_TB] @190 ns | ================================================================
+# [DMA_TB] @190 ns | INFO  | TEST 1: Register Read/Write Verification
+# [DMA_TB] @190 ns | ================================================================
+# [DMA_TB] @190 ns | INFO  | Purpose: Verify all DMA config registers write/readback via TL-UL
+# [DMA_TB] @190 ns | INFO  | Method:  Write known value -> Read back -> Compare with mask
+# 
+# [DMA_TB] @190 ns | INFO  | --- Channel 0 Registers ---
+# [DMA_TB] @350 ns | PASS  | CH0_SRC_ADDR      addr=0x10050008  WR=0x00000100  RD=0x00000100
+# [DMA_TB] @510 ns | PASS  | CH0_DST_ADDR      addr=0x1005000c  WR=0x00000200  RD=0x00000200
+# [DMA_TB] @670 ns | PASS  | CH0_XFER_CNT      addr=0x10050010  WR=0x00000010  RD=0x00000010
+# [DMA_TB] @830 ns | PASS  | CH0_CONTROL       addr=0x10050000  WR=0x00000007  RD=0x00000007
+# [DMA_TB] @910 ns | CFG   | Write CH0_CONTROL  = 0x00000000 (disable)
+# [DMA_TB] @1390 ns | CFG   | Write IRQ_STATUS   = 0x00000003 (clear both)
+# 
+# [DMA_TB] @1390 ns | INFO  | --- Channel 1 Registers ---
+# [DMA_TB] @1550 ns | PASS  | CH1_SRC_ADDR      addr=0x10050028  WR=0x00000300  RD=0x00000300
+# [DMA_TB] @1710 ns | PASS  | CH1_DST_ADDR      addr=0x1005002c  WR=0x00000400  RD=0x00000400
+# [DMA_TB] @1870 ns | PASS  | CH1_XFER_CNT      addr=0x10050030  WR=0x00000020  RD=0x00000020
+# [DMA_TB] @2030 ns | PASS  | CH1_CONTROL       addr=0x10050020  WR=0x00000005  RD=0x00000005
+# [DMA_TB] @2110 ns | CFG   | Write CH1_CONTROL  = 0x00000000 (disable)
+# [DMA_TB] @2590 ns | CFG   | Write IRQ_STATUS   = 0x00000003 (clear both)
+# 
+# [DMA_TB] @2590 ns | INFO  | --- IRQ Status Register (W1C) ---
+# [DMA_TB] @2670 ns | PASS  | IRQ_STATUS       RD=0x00000000 (cleared OK)
+# 
+# [DMA_TB] @2670 ns | INFO  | --- Status Register (Read-Only) ---
+# [DMA_TB] @2750 ns | INFO  | CH0_STATUS       RD=0x000e0000  busy=0 done=0 error=0 remaining=14
+# [DMA_TB] @2750 ns | PASS  | CH0 not busy after disable
+# 
+# [DMA_TB] @2750 ns | ================================================================
+# [DMA_TB] @2750 ns | INFO  | TEST 2: Memory-to-Memory Transfer (CH0, 8 words)
+# [DMA_TB] @2750 ns | ================================================================
+# [DMA_TB] @2750 ns | INFO  | Purpose: Verify DMA copies 8 words from src to dst
+# [DMA_TB] @2750 ns | INFO  | Config:  SRC=0x000 DST=0x080 COUNT=8 src_inc=1 dst_inc=1
+# 
+# [DMA_TB] @2750 ns | DATA  | Source data initialized:
+# [DMA_TB] @2750 ns | DATA  |   mem[  0] (0x000) = 0xdead0000
+# [DMA_TB] @2750 ns | DATA  |   mem[  1] (0x004) = 0xdead0001
+# [DMA_TB] @2750 ns | DATA  |   mem[  2] (0x008) = 0xdead0002
+# [DMA_TB] @2750 ns | DATA  |   mem[  3] (0x00c) = 0xdead0003
+# [DMA_TB] @2750 ns | DATA  |   mem[  4] (0x010) = 0xdead0004
+# [DMA_TB] @2750 ns | DATA  |   mem[  5] (0x014) = 0xdead0005
+# [DMA_TB] @2750 ns | DATA  |   mem[  6] (0x018) = 0xdead0006
+# [DMA_TB] @2750 ns | DATA  |   mem[  7] (0x01c) = 0xdead0007
+# 
+# [DMA_TB] @2830 ns | CFG   | Write CH0_SRC_ADDR = 0x00000000
+# [DMA_TB] @2910 ns | CFG   | Write CH0_DST_ADDR = 0x00000080
+# [DMA_TB] @2990 ns | CFG   | Write CH0_XFER_CNT = 0x00000008 (8 words)
+# [DMA_TB] @3070 ns | CFG   | Write CH0_CONTROL  = 0x00000007 (en=1 src_inc=1 dst_inc=1)
+# [DMA_TB] @3070 ns | INFO  | >>> DMA CH0 transfer STARTED <<<
+# [DMA_TB] @4110 ns | DBG   | DMA CH0 done after 13 polls, status=0x00000000
+# [DMA_TB] @4110 ns | INFO  | >>> DMA CH0 transfer DONE - duration = 1120 ns <<<
+# [DMA_TB] @4190 ns | INFO  | CH0_STATUS = 0x00000000  [busy=0 done=0 error=0 remaining=0]
+# 
+# [DMA_TB] @4190 ns | DATA  | Memory verification (SRC -> DST):
+# [DMA_TB] @4190 ns | DATA  |   Word    SRC @0x000      DST @0x080      Expected        Status
+# [DMA_TB] @4190 ns | DATA  |   ------  -----------     -----------     -----------     ------
+# [DMA_TB] @4190 ns | DATA  |   [ 0]    0xdead0000      0xdead0000      0xdead0000          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 1]    0xdead0001      0xdead0001      0xdead0001          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 2]    0xdead0002      0xdead0002      0xdead0002          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 3]    0xdead0003      0xdead0003      0xdead0003          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 4]    0xdead0004      0xdead0004      0xdead0004          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 5]    0xdead0005      0xdead0005      0xdead0005          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 6]    0xdead0006      0xdead0006      0xdead0006          PASS
+# [DMA_TB] @4190 ns | DATA  |   [ 7]    0xdead0007      0xdead0007      0xdead0007          PASS
+# 
+# [DMA_TB] @4190 ns | PASS  | All 8 words transferred correctly
+# [DMA_TB] @4270 ns | INFO  | IRQ_STATUS = 0x00000001  [ch0_irq=1 ch1_irq=0]
+# [DMA_TB] @4270 ns | PASS  | CH0 IRQ correctly asserted after transfer complete
+# 
+# [DMA_TB] @4350 ns | ================================================================
+# [DMA_TB] @4350 ns | INFO  | TEST 3: No-Increment Fill Mode
+# [DMA_TB] @4350 ns | ================================================================
+# [DMA_TB] @4350 ns | INFO  | Purpose: Fill memory region with constant value (src_inc=0)
+# [DMA_TB] @4350 ns | INFO  | Config:  SRC=0x100 (fixed) DST=0x140 COUNT=4 src_inc=0 dst_inc=1
+# [DMA_TB] @4350 ns | INFO  | Expected: All 4 dst words = 0xCAFEBABE
+# 
+# [DMA_TB] @4350 ns | DATA  | Source:  mem[64] (0x100) = 0xCAFEBABE (fixed, no increment)
+# [DMA_TB] @4350 ns | DATA  | Dest:    mem[80..83] (0x140..0x14C) = cleared to 0
+# 
+# [DMA_TB] @4430 ns | CFG   | Write CH0_SRC_ADDR = 0x00000100
+# [DMA_TB] @4510 ns | CFG   | Write CH0_DST_ADDR = 0x00000140
+# [DMA_TB] @4590 ns | CFG   | Write CH0_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @4670 ns | CFG   | Write CH0_CONTROL  = 0x00000005 (en=1 src_inc=0 dst_inc=1)
+# [DMA_TB] @4670 ns | INFO  | >>> DMA CH0 fill STARTED <<<
+# [DMA_TB] @5230 ns | DBG   | DMA CH0 done after 7 polls, status=0x00000000
+# [DMA_TB] @5230 ns | INFO  | >>> DMA CH0 fill DONE - duration = 640 ns <<<
+# [DMA_TB] @5310 ns | INFO  | CH0_STATUS = 0x00000000  [busy=0 done=0 error=0 remaining=0]
+# 
+# [DMA_TB] @5310 ns | DATA  | Fill verification:
+# [DMA_TB] @5310 ns | DATA  |   Index   Address     Actual          Expected        Status
+# [DMA_TB] @5310 ns | DATA  |   ------  ----------  -----------     -----------     ------
+# [DMA_TB] @5310 ns | DATA  |   [ 0]   0x140      0xcafebabe      0xCAFEBABE          PASS
+# [DMA_TB] @5310 ns | DATA  |   [ 1]   0x144      0xcafebabe      0xCAFEBABE          PASS
+# [DMA_TB] @5310 ns | DATA  |   [ 2]   0x148      0xcafebabe      0xCAFEBABE          PASS
+# [DMA_TB] @5310 ns | DATA  |   [ 3]   0x14c      0xcafebabe      0xCAFEBABE          PASS
+# 
+# [DMA_TB] @5310 ns | PASS  | Fill mode works - all 4 words = 0xCAFEBABE
+# 
+# [DMA_TB] @5390 ns | ================================================================
+# [DMA_TB] @5390 ns | INFO  | TEST 4: Channel 1 Transfer (4 words)
+# [DMA_TB] @5390 ns | ================================================================
+# [DMA_TB] @5390 ns | INFO  | Purpose: Verify CH1 operates independently and correctly
+# [DMA_TB] @5390 ns | INFO  | Config:  CH1 SRC=0x190 DST=0x1E0 COUNT=4 src_inc=1 dst_inc=1
+# 
+# [DMA_TB] @5390 ns | DATA  | Source data (CH1):
+# [DMA_TB] @5390 ns | DATA  |   mem[100] (0x190) = 0xbeef0000
+# [DMA_TB] @5390 ns | DATA  |   mem[101] (0x194) = 0xbeef0001
+# [DMA_TB] @5390 ns | DATA  |   mem[102] (0x198) = 0xbeef0002
+# [DMA_TB] @5390 ns | DATA  |   mem[103] (0x19c) = 0xbeef0003
+# 
+# [DMA_TB] @5470 ns | CFG   | Write CH1_SRC_ADDR = 0x00000190
+# [DMA_TB] @5550 ns | CFG   | Write CH1_DST_ADDR = 0x000001E0
+# [DMA_TB] @5630 ns | CFG   | Write CH1_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @5710 ns | CFG   | Write CH1_CONTROL  = 0x00000007 (en=1 src_inc=1 dst_inc=1)
+# [DMA_TB] @5710 ns | INFO  | >>> DMA CH1 transfer STARTED <<<
+# [DMA_TB] @6270 ns | DBG   | DMA CH1 done after 7 polls, status=0x00000000
+# [DMA_TB] @6270 ns | INFO  | >>> DMA CH1 transfer DONE - duration = 640 ns <<<
+# [DMA_TB] @6350 ns | INFO  | CH1_STATUS = 0x00000000  [busy=0 done=0 error=0 remaining=0]
+# 
+# [DMA_TB] @6350 ns | DATA  | CH1 Data verification:
+# [DMA_TB] @6350 ns | DATA  |   Word    SRC @0x190      DST @0x1E0      Expected        Status
+# [DMA_TB] @6350 ns | DATA  |   ------  -----------     -----------     -----------     ------
+# [DMA_TB] @6350 ns | DATA  |   [ 0]    0xbeef0000      0xbeef0000      0xbeef0000          PASS
+# [DMA_TB] @6350 ns | DATA  |   [ 1]    0xbeef0001      0xbeef0001      0xbeef0001          PASS
+# [DMA_TB] @6350 ns | DATA  |   [ 2]    0xbeef0002      0xbeef0002      0xbeef0002          PASS
+# [DMA_TB] @6350 ns | DATA  |   [ 3]    0xbeef0003      0xbeef0003      0xbeef0003          PASS
+# 
+# [DMA_TB] @6350 ns | PASS  | CH1 transferred all 4 words correctly
+# [DMA_TB] @6430 ns | INFO  | IRQ_STATUS = 0x00000002  [ch0_irq=0 ch1_irq=1]
+# [DMA_TB] @6430 ns | PASS  | CH1 IRQ correctly asserted
+# 
+# [DMA_TB] @6510 ns | ================================================================
+# [DMA_TB] @6510 ns | INFO  | TEST 5: Dual-Channel Concurrent Transfer
+# [DMA_TB] @6510 ns | ================================================================
+# [DMA_TB] @6510 ns | INFO  | Purpose: Verify CH0+CH1 concurrent with round-robin arbitration
+# [DMA_TB] @6510 ns | INFO  | Config:  CH0: SRC=0x000 DST=0x230 COUNT=4
+# [DMA_TB] @6510 ns | INFO  |          CH1: SRC=0x028 DST=0x258 COUNT=4
+# 
+# [DMA_TB] @6510 ns | DATA  | CH0 Source: mem[0..3]   = {0xAAAA0000..0xAAAA0003}
+# [DMA_TB] @6510 ns | DATA  | CH1 Source: mem[10..13] = {0xBBBB0000..0xBBBB0003}
+# 
+# [DMA_TB] @6590 ns | CFG   | Write CH0_SRC_ADDR = 0x00000000
+# [DMA_TB] @6670 ns | CFG   | Write CH0_DST_ADDR = 0x00000230
+# [DMA_TB] @6750 ns | CFG   | Write CH0_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @6830 ns | CFG   | Write CH1_SRC_ADDR = 0x00000028
+# [DMA_TB] @6910 ns | CFG   | Write CH1_DST_ADDR = 0x00000258
+# [DMA_TB] @6990 ns | CFG   | Write CH1_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @7070 ns | CFG   | Write CH0_CONTROL  = 0x00000007 (enable)
+# [DMA_TB] @7150 ns | CFG   | Write CH1_CONTROL  = 0x00000007 (enable)
+# [DMA_TB] @7150 ns | INFO  | >>> Both channels STARTED (round-robin arbitration) <<<
+# [DMA_TB] @7870 ns | DBG   | DMA CH0 done after 9 polls, status=0x00000000
+# [DMA_TB] @7870 ns | INFO  | CH0 done
+# [DMA_TB] @7950 ns | DBG   | DMA CH1 done after 1 polls, status=0x00000000
+# [DMA_TB] @7950 ns | INFO  | CH1 done
+# [DMA_TB] @7950 ns | INFO  | >>> Dual-channel COMPLETE - total duration = 960 ns <<<
+# 
+# [DMA_TB] @8110 ns | INFO  | CH0_STATUS = 0x00000000  [busy=0 done=0 error=0]
+# [DMA_TB] @8110 ns | INFO  | CH1_STATUS = 0x00000000  [busy=0 done=0 error=0]
+# 
+# [DMA_TB] @8110 ns | DATA  | CH0 Data verification:
+# [DMA_TB] @8110 ns | DATA  |   Word    SRC             DST @0x230      Expected        Status
+# [DMA_TB] @8110 ns | DATA  |   [ 0]    0xaaaa0000      0xaaaa0000      0xaaaa0000          PASS
+# [DMA_TB] @8110 ns | DATA  |   [ 1]    0xaaaa0001      0xaaaa0001      0xaaaa0001          PASS
+# [DMA_TB] @8110 ns | DATA  |   [ 2]    0xaaaa0002      0xaaaa0002      0xaaaa0002          PASS
+# [DMA_TB] @8110 ns | DATA  |   [ 3]    0xaaaa0003      0xaaaa0003      0xaaaa0003          PASS
+# 
+# [DMA_TB] @8110 ns | DATA  | CH1 Data verification:
+# [DMA_TB] @8110 ns | DATA  |   Word    SRC             DST @0x258      Expected        Status
+# [DMA_TB] @8110 ns | DATA  |   [ 0]    0xbbbb0000      0xbbbb0000      0xbbbb0000          PASS
+# [DMA_TB] @8110 ns | DATA  |   [ 1]    0xbbbb0001      0xbbbb0001      0xbbbb0001          PASS
+# [DMA_TB] @8110 ns | DATA  |   [ 2]    0xbbbb0002      0xbbbb0002      0xbbbb0002          PASS
+# [DMA_TB] @8110 ns | DATA  |   [ 3]    0xbbbb0003      0xbbbb0003      0xbbbb0003          PASS
+# 
+# [DMA_TB] @8110 ns | PASS  | Both channels transferred correctly
+# [DMA_TB] @8190 ns | INFO  | IRQ_STATUS = 0x00000003  [ch0_irq=1 ch1_irq=1]
+# 
+# [DMA_TB] @8270 ns | ================================================================
+# [DMA_TB] @8270 ns | INFO  | TEST 6: Error Injection (TL-UL d_denied response)
+# [DMA_TB] @8270 ns | ================================================================
+# [DMA_TB] @8270 ns | INFO  | Purpose: Inject bus error (d_denied=1) during DMA transfer
+# [DMA_TB] @8270 ns | INFO  | Method:  Memory model returns d_denied on 2nd bus transaction
+# [DMA_TB] @8270 ns | INFO  | Expected: CH0 status error bit set, transfer aborted
+# 
+# [DMA_TB] @8290 ns | CFG   | Error injection enabled: deny_after_n=2
+# [DMA_TB] @8370 ns | CFG   | Write CH0_SRC_ADDR = 0x00000280 (word 160)
+# [DMA_TB] @8450 ns | CFG   | Write CH0_DST_ADDR = 0x000002A8 (word 170)
+# [DMA_TB] @8530 ns | CFG   | Write CH0_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @8610 ns | CFG   | Write CH0_CONTROL  = 0x00000007 (enable - error expected!)
+# [DMA_TB] @8610 ns | INFO  | >>> DMA CH0 STARTED (error injection active) <<<
+# [DMA_TB] @8770 ns | DBG   | DMA CH0 done after 2 polls, status=0x00040004
+# [DMA_TB] @8770 ns | INFO  | >>> DMA CH0 STOPPED - duration = 240 ns <<<
+# 
+# [DMA_TB] @8850 ns | INFO  | CH0_STATUS = 0x00040004
+# [DMA_TB] @8850 ns | INFO  |   busy      = 0
+# [DMA_TB] @8850 ns | INFO  |   done      = 0
+# [DMA_TB] @8850 ns | INFO  |   error     = 1  <-- should be 1
+# [DMA_TB] @8850 ns | INFO  |   remaining = 4 words (aborted early)
+# 
+# [DMA_TB] @8850 ns | PASS  | CH0 error bit correctly set after d_denied
+# [DMA_TB] @8850 ns | PASS  | Transfer aborted with 4 words remaining
+# [DMA_TB] @8930 ns | INFO  | IRQ_STATUS = 0x00000001  [ch0_irq=1]
+# [DMA_TB] @8930 ns | PASS  | IRQ asserted on error condition
+# [DMA_TB] @8930 ns | CFG   | Error injection disabled
+# 
+# [DMA_TB] @9090 ns | ================================================================
+# [DMA_TB] @9090 ns | INFO  | TEST 7: Back-to-Back Transfers (re-enable same channel)
+# [DMA_TB] @9090 ns | ================================================================
+# [DMA_TB] @9090 ns | INFO  | Purpose: Verify CH0 can be disabled, reconfigured, and re-enabled
+# [DMA_TB] @9090 ns | INFO  | Transfer A: SRC=0x000 DST=0x320 COUNT=4 (pattern 0x1111xxxx)
+# [DMA_TB] @9090 ns | INFO  | Transfer B: SRC=0x010 DST=0x348 COUNT=4 (pattern 0x2222xxxx)
+# 
+# [DMA_TB] @9090 ns | INFO  | --- Transfer A ---
+# [DMA_TB] @9170 ns | CFG   | Write CH0_SRC_ADDR = 0x00000000
+# [DMA_TB] @9250 ns | CFG   | Write CH0_DST_ADDR = 0x00000320
+# [DMA_TB] @9330 ns | CFG   | Write CH0_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @9410 ns | CFG   | Write CH0_CONTROL  = 0x00000007 (enable)
+# [DMA_TB] @9410 ns | INFO  | >>> Transfer A STARTED <<<
+# [DMA_TB] @9970 ns | DBG   | DMA CH0 done after 7 polls, status=0x00000000
+# [DMA_TB] @9970 ns | INFO  | >>> Transfer A DONE - duration = 640 ns <<<
+# [DMA_TB] @10050 ns | INFO  | CH0_STATUS after A: 0x00000000 [done=0 error=0]
+# [DMA_TB] @10210 ns | CFG   | CH0 disabled, IRQ cleared. Reconfiguring...
+# 
+# [DMA_TB] @10210 ns | INFO  | --- Transfer B ---
+# [DMA_TB] @10290 ns | CFG   | Write CH0_SRC_ADDR = 0x00000010
+# [DMA_TB] @10370 ns | CFG   | Write CH0_DST_ADDR = 0x00000348
+# [DMA_TB] @10450 ns | CFG   | Write CH0_XFER_CNT = 0x00000004 (4 words)
+# [DMA_TB] @10530 ns | CFG   | Write CH0_CONTROL  = 0x00000007 (re-enable)
+# [DMA_TB] @10530 ns | INFO  | >>> Transfer B STARTED <<<
+# [DMA_TB] @11090 ns | DBG   | DMA CH0 done after 7 polls, status=0x00000000
+# [DMA_TB] @11090 ns | INFO  | >>> Transfer B DONE - duration = 640 ns <<<
+# [DMA_TB] @11170 ns | INFO  | CH0_STATUS after B: 0x00000000 [done=0 error=0]
+# 
+# [DMA_TB] @11170 ns | DATA  | Transfer A verification (DST @0x320):
+# [DMA_TB] @11170 ns | DATA  |   [ 0] mem[200] = 0x11110000  exp=0x11110000      PASS
+# [DMA_TB] @11170 ns | DATA  |   [ 1] mem[201] = 0x11110001  exp=0x11110001      PASS
+# [DMA_TB] @11170 ns | DATA  |   [ 2] mem[202] = 0x11110002  exp=0x11110002      PASS
+# [DMA_TB] @11170 ns | DATA  |   [ 3] mem[203] = 0x11110003  exp=0x11110003      PASS
+# [DMA_TB] @11170 ns | DATA  | Transfer B verification (DST @0x348):
+# [DMA_TB] @11170 ns | DATA  |   [ 0] mem[210] = 0x22220000  exp=0x22220000      PASS
+# [DMA_TB] @11170 ns | DATA  |   [ 1] mem[211] = 0x22220001  exp=0x22220001      PASS
+# [DMA_TB] @11170 ns | DATA  |   [ 2] mem[212] = 0x22220002  exp=0x22220002      PASS
+# [DMA_TB] @11170 ns | DATA  |   [ 3] mem[213] = 0x22220003  exp=0x22220003      PASS
+# 
+# [DMA_TB] @11170 ns | PASS  | Back-to-back transfers both correct
+# 
+# [DMA_TB] @11250 ns | ================================================================
+# [DMA_TB] @11250 ns | INFO  | TEST 8: Large Transfer (CH0, 64 words)
+# [DMA_TB] @11250 ns | ================================================================
+# [DMA_TB] @11250 ns | INFO  | Purpose: Verify DMA transfer counter decrements correctly
+# [DMA_TB] @11250 ns | INFO  |          over a large 64-word burst - counter must reach 0
+# [DMA_TB] @11250 ns | INFO  | Config:  SRC=0x000 DST=0x100 COUNT=64 src_inc=1 dst_inc=1
+# [DMA_TB] @11250 ns | INFO  | Pattern: SRC[i] = 0xA5A5_0000 + i
+# 
+# [DMA_TB] @11250 ns | DATA  | Source  mem[  0.. 3] = 0xA5A50000..0xA5A50003  (first 4)
+# [DMA_TB] @11250 ns | DATA  | Source  mem[ 32..35] = 0xA5A50020..0xA5A50023  (mid 4)
+# [DMA_TB] @11250 ns | DATA  | Source  mem[ 60..63] = 0xA5A5003C..0xA5A5003F  (last 4)
+# [DMA_TB] @11250 ns | DATA  | Dest    mem[ 64..127] (0x100-0x1FC) = cleared to 0
+# 
+# [DMA_TB] @11330 ns | CFG   | Write CH0_SRC_ADDR = 0x00000000
+# [DMA_TB] @11410 ns | CFG   | Write CH0_DST_ADDR = 0x00000100
+# [DMA_TB] @11490 ns | CFG   | Write CH0_XFER_CNT = 0x00000040 (64 words)
+# [DMA_TB] @11570 ns | CFG   | Write CH0_CONTROL  = 0x00000007 (en=1 src_inc=1 dst_inc=1)
+# [DMA_TB] @11570 ns | INFO  | >>> DMA CH0 Large Transfer STARTED (64 words) <<<
+# [DMA_TB] @19330 ns | DBG   | DMA CH0 done after 97 polls, status=0x00000000
+# [DMA_TB] @19330 ns | INFO  | >>> DMA CH0 Large Transfer DONE - duration = 7840 ns <<<
+# [DMA_TB] @19410 ns | INFO  | CH0_STATUS = 0x00000000  [busy=0 done=0 error=0 remaining=0]
+# [DMA_TB] @19410 ns | PASS  | Transfer counter reached 0 - all 64 words sent
+# 
+# [DMA_TB] @19410 ns | DATA  | Data spot-check -- 3 representative words (first / mid / last):
+# [DMA_TB] @19410 ns | DATA  |   Word    SRC @0x000      DST @0x100      Expected        Status
+# [DMA_TB] @19410 ns | DATA  |   ------  -----------     -----------     -----------     ------
+# [DMA_TB] @19410 ns | DATA  |   [ 0]    0xa5a50000      0xa5a50000      0xa5a50000          PASS
+# [DMA_TB] @19410 ns | DATA  |   [32]    0xa5a50020      0xa5a50020      0xa5a50020          PASS
+# [DMA_TB] @19410 ns | DATA  |   [63]    0xa5a5003f      0xa5a5003f      0xa5a5003f          PASS
+# [DMA_TB] @19410 ns | DATA  |   ... (64 words total - only 3 samples shown above)
+# 
+# [DMA_TB] @19410 ns | DATA  | Full-range check result: 64 PASS, 0 FAIL (out of 64 words)
+# [DMA_TB] @19410 ns | PASS  | All 64 words transferred correctly (data integrity OK)
+# [DMA_TB] @19490 ns | INFO  | IRQ_STATUS = 0x00000001  [ch0_irq=1 ch1_irq=0]
+# [DMA_TB] @19490 ns | PASS  | CH0 IRQ correctly asserted after 64-word transfer
+# 
+# [DMA_TB] @19650 ns | ================================================================
+# [DMA_TB] @19650 ns | INFO  | TEST 9: Sequential Dual-Channel Transfer
+# [DMA_TB] @19650 ns | ================================================================
+# [DMA_TB] @19650 ns | INFO  | Purpose : Verify CH1 can reuse TL-UL bus after CH0 completes
+# [DMA_TB] @19650 ns | INFO  | Sequence: [1] Enable CH0 only  ->  [2] CH0 done, SW clears  ->  [3] SW enables CH1
+# [DMA_TB] @19650 ns | INFO  | Config  : CH0  SRC=0x000 DST=0x200 COUNT=8  pattern=0xC0C0_0000+i
+# [DMA_TB] @19650 ns | INFO  |           CH1  SRC=0x040 DST=0x220 COUNT=8  pattern=0xC1C1_0000+i
+# 
+# [DMA_TB] @20130 ns | CFG   | CH0: SRC=0x000 DST=0x200 CNT=8   CH1: SRC=0x040 DST=0x220 CNT=8
+# [DMA_TB] @20130 ns | INFO  | Both channels pre-configured -- neither enabled yet
+# 
+# [DMA_TB] @20130 ns | INFO  | ---- Phase 1: Enable CH0 only (CH1 remains idle) ----
+# [DMA_TB] @20210 ns | CFG   | CH0_CONTROL = 0x7  [en=1 src_inc=1 dst_inc=1] -- CH0 STARTED
+# [DMA_TB] @21250 ns | DBG   | DMA CH0 done after 13 polls, status=0x00000000
+# [DMA_TB] @21250 ns | INFO  | >>> CH0 DONE -- duration = 1120 ns <<<
+# [DMA_TB] @21330 ns | INFO  | CH0_STATUS = 0x00000000  [busy=0 done=0 error=0 remaining=0]
+# [DMA_TB] @21410 ns | INFO  | IRQ_STATUS = 0x00000001  [ch0_irq=1 ch1_irq=0]
+# [DMA_TB] @21570 ns | CFG   | CH0 disabled + IRQ cleared -- TL-UL bus is now free
+# 
+# [DMA_TB] @21570 ns | INFO  | ---- Phase 2: Software enables CH1 (bus reuse) ----
+# [DMA_TB] @21650 ns | CFG   | CH1_CONTROL = 0x7  [en=1 src_inc=1 dst_inc=1] -- CH1 STARTED
+# [DMA_TB] @22690 ns | DBG   | DMA CH1 done after 13 polls, status=0x00000000
+# [DMA_TB] @22690 ns | INFO  | >>> CH1 DONE - duration = 1120 ns <<<
+# [DMA_TB] @22770 ns | INFO  | CH1_STATUS = 0x00000000  [busy=0 done=0 error=0 remaining=0]
+# [DMA_TB] @22850 ns | INFO  | IRQ_STATUS = 0x00000002  [ch0_irq=0 ch1_irq=1]
+# 
+# [DMA_TB] @23010 ns | INFO  | Sequential timing: CH0=1120 ns, CH1=1120 ns, bus gap=320 ns
+# [DMA_TB] @23010 ns | INFO  | No overlap -- confirms strictly sequential execution
+# 
+# [DMA_TB] @23010 ns | DATA  | CH0 Data verification (SRC @0x000 -> DST @0x200):
+# [DMA_TB] @23010 ns | DATA  |   Word    SRC @0x000      DST @0x200      Expected        Status
+# [DMA_TB] @23010 ns | DATA  |   [ 0]    0xc0c00000      0xc0c00000      0xc0c00000          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 1]    0xc0c00001      0xc0c00001      0xc0c00001          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 2]    0xc0c00002      0xc0c00002      0xc0c00002          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 3]    0xc0c00003      0xc0c00003      0xc0c00003          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 4]    0xc0c00004      0xc0c00004      0xc0c00004          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 5]    0xc0c00005      0xc0c00005      0xc0c00005          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 6]    0xc0c00006      0xc0c00006      0xc0c00006          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 7]    0xc0c00007      0xc0c00007      0xc0c00007          PASS
+# [DMA_TB] @23010 ns | PASS  | CH0: all 8 words transferred correctly (Phase 1 OK)
+# 
+# [DMA_TB] @23010 ns | DATA  | CH1 Data verification (SRC @0x040 -> DST @0x220):
+# [DMA_TB] @23010 ns | DATA  |   Word    SRC @0x040      DST @0x220      Expected        Status
+# [DMA_TB] @23010 ns | DATA  |   [ 0]    0xc1c10000      0xc1c10000      0xc1c10000          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 1]    0xc1c10001      0xc1c10001      0xc1c10001          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 2]    0xc1c10002      0xc1c10002      0xc1c10002          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 3]    0xc1c10003      0xc1c10003      0xc1c10003          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 4]    0xc1c10004      0xc1c10004      0xc1c10004          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 5]    0xc1c10005      0xc1c10005      0xc1c10005          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 6]    0xc1c10006      0xc1c10006      0xc1c10006          PASS
+# [DMA_TB] @23010 ns | DATA  |   [ 7]    0xc1c10007      0xc1c10007      0xc1c10007          PASS
+# [DMA_TB] @23010 ns | PASS  | CH1: all 8 words transferred correctly (bus reuse verified)
+# 
+# [DMA_TB] @23010 ns | ################################################################
+# [DMA_TB] @23010 ns | #                    FINAL TEST SUMMARY                        #
+# [DMA_TB] @23010 ns | ################################################################
+# [DMA_TB] @23010 ns | #                                                              #
+# [DMA_TB] @23010 ns | #   Total Checks : 24                                         #
+# [DMA_TB] @23010 ns | #   Passed       : 25                                         #
+# [DMA_TB] @23010 ns | #   Failed       : 0                                          #
+# [DMA_TB] @23010 ns | #                                                              #
+# [DMA_TB] @23010 ns | #   Result: *** ALL TESTS PASSED ***                          #
+# [DMA_TB] @23010 ns | #                                                              #
+# [DMA_TB] @23010 ns | #   Simulation Time : 23010 ns                                   #
+# [DMA_TB] @23010 ns | #                                                              #
+# [DMA_TB] @23010 ns | #   Test Breakdown:                                           #
+# [DMA_TB] @23010 ns | #     T1 Register R/W          : verified                     #
+# [DMA_TB] @23010 ns | #     T2 Memory-to-Memory      : verified                     #
+# [DMA_TB] @23010 ns | #     T3 No-Increment Fill     : verified                     #
+# [DMA_TB] @23010 ns | #     T4 Channel 1 Transfer    : verified                     #
+# [DMA_TB] @23010 ns | #     T5 Dual-Channel Conc.    : verified                     #
+# [DMA_TB] @23010 ns | #     T6 Error Injection       : verified                     #
+# [DMA_TB] @23010 ns | #     T7 Back-to-Back          : verified                     #
+# [DMA_TB] @23010 ns | #     T8 Large Transfer (64w)  : verified                     #
+# [DMA_TB] @23010 ns | #     T9 Sequential Dual-Ch    : verified                     #
+# [DMA_TB] @23010 ns | #                                                              #
+# [DMA_TB] @23010 ns | ################################################################
+# 
+# ** Note: $finish    : ../000_tlul/dma/dma_tb.sv(1235)
+#    Time: 23010 ns  Iteration: 1  Instance: /dma_tb
+# End time: 22:40:48 on Apr 06,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1

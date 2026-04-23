@@ -1,0 +1,39 @@
+﻿vsim -c -voptargs="+acc" -do "run -all; quit -f" soc_demo_tb 
+run -all
+Test Vector: RFC 8439 Sec 2.4.2 Sunscreen (64-byte block 1)
+--- Phase 1: Sending 64 plaintext bytes via UART (115200) ---
+[40390000] UART -> SoC byte[ 0]: 0x4c ('L')
+[135870000] UART -> SoC byte[ 1]: 0x61 ('a')
+[231350000] UART -> SoC byte[ 2]: 0x64 ('d')
+[326830000] UART -> SoC byte[ 3]: 0x69 ('i')
+... (sending bytes 4-59) ...
+[5769190000] UART -> SoC byte[60]: 0x6f ('o')
+[5864670000] UART -> SoC byte[61]: 0x75 ('u')
+[5960150000] UART -> SoC byte[62]: 0x20 (' ')
+[6055630000] UART -> SoC byte[63]: 0x6f ('o')
+[6151110000] All 64 bytes sent. UART RX duration: 6110720 ns (305536 cycles)
+[6273450000] Captured TX byte[ 0]: 0x6e
+[6360750000] Captured TX byte[ 1]: 0x2e
+[6448050000] Captured TX byte[ 2]: 0x35
+[6535350000] Captured TX byte[ 3]: 0x9a
+... (capturing bytes 4-59) ...
+[7670250000] Captured TX byte[16]: 0xe9
+[9067050000] Captured TX byte[32]: 0xf9
+[10463850000] Captured TX byte[48]: 0x16
+[11511450000] Captured TX byte[60]: 0x9f
+[11598750000] Captured TX byte[61]: 0x08
+[11686050000] Captured TX byte[62]: 0x61
+[11773350000] Captured TX byte[63]: 0xd8
+[11773350000] All 64 ciphertext bytes captured from UART TX.
+Byte[ 0]: Exp=0x6e Got=0x6e  PASS
+Byte[ 1]: Exp=0x2e Got=0x2e  PASS
+Byte[ 2]: Exp=0x35 Got=0x35  PASS
+Byte[ 3]: Exp=0x9a Got=0x9a  PASS
+... (bytes 4-59 checking) ...
+Byte[60]: Exp=0x9f Got=0x9f  PASS
+Byte[61]: Exp=0x08 Got=0x08  PASS
+Byte[62]: Exp=0x61 Got=0x61  PASS
+Byte[63]: Exp=0xd8 Got=0xd8  PASS
+RESULT: 64/64 PASS  *** ALL BYTES CORRECT ***
+Timing Summary:
+UART RX (64 bytes):       305536 cycles

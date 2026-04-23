@@ -1,0 +1,171 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run -all; quit -f" aead_corner_tb 
+# Start time: 22:23:15 on Mar 31,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vopt-143) Recognized 1 FSM in module "chacha20_core(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "poly1305_core(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.aead_corner_tb(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# Loading work.poly1305_core(fast)
+# run -all
+# 
+################################################################
+#  AEAD_CHACHA20_POLY1305  Corner-Case Testbench               #
+################################################################
+# 
+#   --- TC1: Empty PT, 12B AAD (PT=0 B, AAD=12 B) ---
+#     CT: (empty)
+#     Tag: 5c677f6cb4bceca767d9387a64e522e6
+#   [PASS] TC1: Empty PT, 12B AAD Γ?? PT round-trip               
+#   [PASS] TC1: Empty PT, 12B AAD Γ?? Tag match                   
+#          Enc tag: 5c677f6cb4bceca767d9387a64e522e6
+# 
+#   --- TC2: 64B PT, no AAD (PT=64 B, AAD=0 B) ---
+#     CT[0..15]:
+#       9f 7a eb 5e 05 f8 46 bd 1d eb 85 f0 3a 8c 04 a1 
+#       ... (48 more bytes)
+#     Tag: e50ffb22065d4bd66f063f9ca90603d3
+#   [PASS] TC2: 64B PT, no AAD Γ?? PT round-trip                  
+#   [PASS] TC2: 64B PT, no AAD Γ?? Tag match                      
+#          Enc tag: e50ffb22065d4bd66f063f9ca90603d3
+# 
+#   --- TC3: Empty PT, empty AAD (PT=0 B, AAD=0 B) ---
+#     CT: (empty)
+#     Tag: 04bf394b7f4ef6b4fef316477a4d78a0
+#   [PASS] TC3: Empty PT, empty AAD Γ?? PT round-trip             
+#   [PASS] TC3: Empty PT, empty AAD Γ?? Tag match                 
+#          Enc tag: 04bf394b7f4ef6b4fef316477a4d78a0
+# 
+#   --- TC4: 1B PT, 1B AAD (PT=1 B, AAD=1 B) ---
+#     CT[0..0]:
+#       34 
+#     Tag: 2a4ad6a9865aec07046d7f49daf52644
+#   [PASS] TC4: 1B PT, 1B AAD Γ?? PT round-trip                   
+#   [PASS] TC4: 1B PT, 1B AAD Γ?? Tag match                       
+#          Enc tag: 2a4ad6a9865aec07046d7f49daf52644
+# 
+#   --- TC5: 15B PT, 15B AAD (partial blocks) (PT=15 B, AAD=15 B) ---
+#     CT[0..14]:
+#       8f 6a fb 4e 15 e8 56 ad 0d fb 95 e0 2a 9c 14 
+#     Tag: fb2c0e3c8d77e4cc4d5cb8687d47daab
+#   [PASS] TC5: 15B PT, 15B AAD (partial blocks) Γ?? PT round-trip
+#   [PASS] TC5: 15B PT, 15B AAD (partial blocks) Γ?? Tag match    
+#          Enc tag: fb2c0e3c8d77e4cc4d5cb8687d47daab
+# 
+#   --- TC6: 16B PT, 16B AAD (exact, no padding) (PT=16 B, AAD=16 B) ---
+#     CT[0..15]:
+#       bf 5a cb 7e 25 d8 66 9d 3d cb a5 d0 1a ac 24 81 
+#     Tag: 1b88e0c75db6572ca83ef7ed98ba6a5f
+#   [PASS] TC6: 16B PT, 16B AAD (exact, no padding) Γ?? PT round-trip
+#   [PASS] TC6: 16B PT, 16B AAD (exact, no padding) Γ?? Tag match 
+#          Enc tag: 1b88e0c75db6572ca83ef7ed98ba6a5f
+# 
+#   --- TC7: 17B PT, 17B AAD (1 over boundary) (PT=17 B, AAD=17 B) ---
+#     CT[0..15]:
+#       af 4a db 6e 35 c8 76 8d 2d db b5 c0 0a bc 34 91 
+#       ... (1 more bytes)
+#     Tag: dc23878e7e8ae16e6be028bcec6d7984
+#   [PASS] TC7: 17B PT, 17B AAD (1 over boundary) Γ?? PT round-trip
+#   [PASS] TC7: 17B PT, 17B AAD (1 over boundary) Γ?? Tag match   
+#          Enc tag: dc23878e7e8ae16e6be028bcec6d7984
+# 
+#   --- TC8: 64B PT, 12B AAD (full block) (PT=64 B, AAD=12 B) ---
+#     CT[0..15]:
+#       60 85 14 a1 fa 07 b9 42 e2 14 7a 0f c5 73 fb 5e 
+#       ... (48 more bytes)
+#     Tag: abf5e91e5f931eeae29c016892f72b0a
+#   [PASS] TC8: 64B PT, 12B AAD (full block) Γ?? PT round-trip    
+#   [PASS] TC8: 64B PT, 12B AAD (full block) Γ?? Tag match        
+#          Enc tag: abf5e91e5f931eeae29c016892f72b0a
+# 
+#   --- TC9: 65B PT, 12B AAD (crosses ChaCha block) (PT=65 B, AAD=12 B) ---
+#     CT[0..15]:
+#       9c 71 f8 45 1e db 6d 8e 2e a0 c6 ab 61 df 6f c2 
+#       ... (49 more bytes)
+#     Tag: 423968f16899adffe50dc24b769c3d8c
+#   [PASS] TC9: 65B PT, 12B AAD (crosses ChaCha block) Γ?? PT round-trip
+#   [PASS] TC9: 65B PT, 12B AAD (crosses ChaCha block) Γ?? Tag match
+#          Enc tag: 423968f16899adffe50dc24b769c3d8c
+# 
+#   --- TC10: 128B PT, 32B AAD (2 ChaCha blocks) (PT=128 B, AAD=32 B) ---
+#     CT[0..15]:
+#       98 6f c8 73 3a b5 15 d8 7a 9e 06 6d 95 31 b7 64 
+#       ... (112 more bytes)
+#     Tag: 07094a9b04eca8c3cdd6a8b0505eb9fc
+#   [PASS] TC10: 128B PT, 32B AAD (2 ChaCha blocks) Γ?? PT round-trip
+#   [PASS] TC10: 128B PT, 32B AAD (2 ChaCha blocks) Γ?? Tag match 
+#          Enc tag: 07094a9b04eca8c3cdd6a8b0505eb9fc
+# 
+#   --- TC11: Tag sensitivity (flip 1 CT bit) ---
+#     Good tag: c2c2561f4729c7b74622a32c4c2cdc2e
+#     Bad  tag: d016c4f9d715ab27c252ebed1820eba3
+#   [PASS] TC11: Tag sensitivity Γ?? tags differ                  
+# 
+#   --- TC12: Poly1305 re-init correctness ---
+#     Tag A: 9952390b4a77d458212d973bcb7dae6a  (PT=16├?0xAA, AAD=4├?0x11)
+#     Tag B: e1283f47ee3e1ad868248ad540d9166a  (PT=16├?0xBB, AAD=4├?0x22)
+#     Tag B': e1283f47ee3e1ad868248ad540d9166a (re-run of B)
+#   [PASS] TC12a: Different data Γ?? different tags               
+#   [PASS] TC12b: Re-init gives identical tag                     
+# 
+#   --- TC13: All-zero key/nonce/PT/AAD (PT=48 B, AAD=8 B) ---
+#     CT[0..15]:
+#       9f 07 e7 be 55 51 38 7a 98 ba 97 7c 73 2d 08 0d 
+#       ... (32 more bytes)
+#     Tag: 43381d60ef99b8a4a445253187e813e4
+#   [PASS] TC13: All-zero key/nonce/PT/AAD Γ?? PT round-trip      
+#   [PASS] TC13: All-zero key/nonce/PT/AAD Γ?? Tag match          
+#          Enc tag: 43381d60ef99b8a4a445253187e813e4
+# 
+#   --- TC14: 63B PT (1 short of block) (PT=63 B, AAD=4 B) ---
+#     CT[0..15]:
+#       fb 1e 8f 3a 69 94 2a d1 79 8f e1 94 46 f0 78 dd 
+#       ... (47 more bytes)
+#     Tag: 723c43e4aa50f3d18f250eec88f4cfe1
+#   [PASS] TC14: 63B PT (1 short of block) Γ?? PT round-trip      
+#   [PASS] TC14: 63B PT (1 short of block) Γ?? Tag match          
+#          Enc tag: 723c43e4aa50f3d18f250eec88f4cfe1
+# 
+#   --- TC15: 129B PT, 1B AAD (3 ChaCha blks) (PT=129 B, AAD=1 B) ---
+#     CT[0..15]:
+#       9f 78 ef 54 0d f2 52 af 0d f9 91 da 12 a6 20 83 
+#       ... (113 more bytes)
+#     Tag: 7589084e979d7abd5872c6918f638a7d
+#   [PASS] TC15: 129B PT, 1B AAD (3 ChaCha blks) Γ?? PT round-trip
+#   [PASS] TC15: 129B PT, 1B AAD (3 ChaCha blks) Γ?? Tag match    
+#          Enc tag: 7589084e979d7abd5872c6918f638a7d
+# 
+################################################################
+#  SUMMARY: 29 tests, 29 passed, 0 failed
+#  >>> ALL TESTS PASSED <<<
+################################################################
+# 
+# ** Note: $finish    : ../000_tlul/tb/aead_corner_tb.sv(770)
+#    Time: 65710 ns  Iteration: 0  Instance: /aead_corner_tb
+# End time: 22:23:16 on Mar 31,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 3

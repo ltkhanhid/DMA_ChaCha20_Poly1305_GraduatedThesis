@@ -1,0 +1,7 @@
+-sv
+-timescale 1ns/100ps
+
+# UART byte TX/RX loopback testbench
+../000_tlul/uart_byte_tx.sv
+../000_tlul/uart_byte_rx.sv
+../000_tlul/tb/uart_byte_tb.sv

@@ -1,0 +1,105 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run 20ms; quit -f" uart_byte_tb 
+# Start time: 22:41:24 on Apr 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Note: (vopt-143) Recognized 1 FSM in module "uart_rx_8bit(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "uart_tx_8bit(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.uart_byte_tb(fast)
+# Loading work.uart_tx_8bit(fast)
+# Loading work.uart_rx_8bit(fast)
+# run 20ms
+# 
+# ========================================
+# Starting UART Byte TX/RX Testbench
+# ========================================
+# 
+# [390000] Test 1: 0xAA: Sending 0xaa
+# [430000] TX: send_en asserted, data=0xaa
+# [83010000] Test 1: 0xAA: RX complete, received 0xaa
+# [83030000] RX: rx_done asserted, data=0xaa
+# [87230000] Test 1: 0xAA: TX complete
+# [87230000] Test 1: 0xAA: PASSED Γ??
+# 
+# [87250000] TX: tx_done asserted
+# [88230000] Test 2: 0x55: Sending 0x55
+# [88270000] TX: send_en asserted, data=0x55
+# [170850000] Test 2: 0x55: RX complete, received 0x55
+# [170870000] RX: rx_done asserted, data=0x55
+# [175070000] Test 2: 0x55: TX complete
+# [175070000] Test 2: 0x55: PASSED Γ??
+# 
+# [175090000] TX: tx_done asserted
+# [176070000] Test 3: 0x00: Sending 0x00
+# [176110000] TX: send_en asserted, data=0x00
+# [258690000] Test 3: 0x00: RX complete, received 0x00
+# [258710000] RX: rx_done asserted, data=0x00
+# [262910000] Test 3: 0x00: TX complete
+# [262910000] Test 3: 0x00: PASSED Γ??
+# 
+# [262930000] TX: tx_done asserted
+# [263910000] Test 4: 0xFF: Sending 0xff
+# [263950000] TX: send_en asserted, data=0xff
+# [346530000] Test 4: 0xFF: RX complete, received 0xff
+# [346550000] RX: rx_done asserted, data=0xff
+# [350750000] Test 4: 0xFF: TX complete
+# [350750000] Test 4: 0xFF: PASSED Γ??
+# 
+# [350770000] TX: tx_done asserted
+# [351750000] Test 5: 0x3C: Sending 0x3c
+# [351790000] TX: send_en asserted, data=0x3c
+# [434370000] Test 5: 0x3C: RX complete, received 0x3c
+# [434390000] RX: rx_done asserted, data=0x3c
+# [438590000] Test 5: 0x3C: TX complete
+# [438590000] Test 5: 0x3C: PASSED Γ??
+# 
+# [438610000] TX: tx_done asserted
+# [439590000] Test 6: Back-to-back transfers
+# [439630000] TX: send_en asserted, data=0x12
+# [522230000] RX: rx_done asserted, data=0x12
+# [526450000] TX: tx_done asserted
+# [526570000] TX: send_en asserted, data=0x34
+# [609170000] RX: rx_done asserted, data=0x34
+# [613390000] TX: tx_done asserted
+# [633370000] Test 6: Back-to-back test complete
+# 
+# [633370000] Test 7: Multiple baud rates
+# [633610000] TX: send_en asserted, data=0xa5
+# [716190000] Test 7: 9600 baud PASSED Γ??
+# [716210000] RX: rx_done asserted, data=0xa5
+# [718190000] Test 7: Complete
+# 
+# 
+# ========================================
+# Test Summary:
+#   PASSED: 7
+#   FAILED: 0
+# ========================================
+# 
+# *** ALL TESTS PASSED ***
+# 
+# ** Note: $finish    : ../000_tlul/tb/uart_byte_tb.sv(109)
+#    Time: 720190 ns  Iteration: 1  Instance: /uart_byte_tb
+# End time: 22:41:25 on Apr 06,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1

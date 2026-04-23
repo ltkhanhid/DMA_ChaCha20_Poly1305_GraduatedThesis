@@ -1,0 +1,198 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run -all; quit -f" soc_dma_tb 
+# Start time: 22:22:42 on Mar 31,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Note: (vopt-143) Recognized 1 FSM in module "tlul_xbar_2m6s(fast)".
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vopt-143) Recognized 1 FSM in module "chacha20_core(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "tlul_host_adapter(fast)".
+# ** Warning: ../000_tlul/tb/soc_dma_tb.sv(70): (vopt-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 24, found 23.
+# ** Warning: ../000_tlul/tb/soc_dma_tb.sv(70): (vopt-2718) [TFMPC] - Missing connection for port 'irq_poly_o'.
+# ** Note: (vopt-143) Recognized 1 FSM in module "poly1305_core(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_tlul_master(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast__1)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "tlul_adapter_mem(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "uart_rx_8bit(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "uart_tx_8bit(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=5.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tlul_pkg(fast)
+# Loading work.soc_dma_tb(fast)
+# Loading work.soc_top_2m6s(fast)
+# Loading work.pipelined_tl(fast)
+# Loading work.IF(fast)
+# Loading work.PCplus4(fast)
+# Loading work.pc(fast)
+# Loading work.instr_mem(fast)
+# Loading work.IF_ID_reg(fast)
+# Loading work.ID(fast)
+# Loading work.regfile(fast)
+# Loading work.ImmGen(fast)
+# Loading work.control_logic(fast)
+# Loading work.ID_EX_reg_tl(fast)
+# Loading work.EX(fast)
+# Loading work.mux2(fast)
+# Loading work.mux4_fw(fast)
+# Loading work.alu(fast)
+# Loading work.brc(fast)
+# Loading work.EX_MEM_reg_tl(fast)
+# Loading work.MEM_tl(fast)
+# Loading work.tlul_host_adapter(fast)
+# Loading work.MEM_WB_reg_tl(fast)
+# Loading work.WB(fast)
+# Loading work.mux3_wb(fast)
+# Loading work.hazard_detection_tl(fast)
+# Loading work.forwarding_unit(fast)
+# Loading work.tlul_xbar_2m6s(fast)
+# Loading work.tlul_adapter_mem(fast)
+# Loading work.memory(fast)
+# Loading work.tlul_adapter_peri(fast)
+# Loading work.peripherals(fast)
+# Loading work.SevenSegment(fast)
+# Loading work.tlul_uart_bridge(fast)
+# Loading work.uart_tx_8bit(fast)
+# Loading work.uart_rx_8bit(fast)
+# Loading work.tlul_dma(fast)
+# Loading work.dma_controller(fast)
+# Loading work.dma_channel(fast)
+# Loading work.dma_channel(fast__1)
+# Loading work.dma_arbiter(fast)
+# Loading work.dma_tlul_master(fast)
+# Loading work.tlul_chacha20(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# Loading work.tlul_poly1305(fast)
+# Loading work.poly1305_core(fast)
+# run -all
+# 
+################################################################
+#                                                              #
+#   SoC DMA Integration Test                                  #
+#   CPU memcpy vs DMA memcpy (100 words through TileLink)     #
+#                                                              #
+#   DUT: soc_top_2m6s (2-Master, 6-Slave TL-UL SoC)          #
+#   Firmware: dma_test.hex                                    #
+#                                                              #
+#   Phase 1: CPU initializes 100 words at DMEM 0x1000         #
+#   Phase 2: CPU memcpy lw/sw 0x1000 -> 0x2000                #
+#   Phase 3: DMA transfer     0x1000 -> 0x3000                #
+#   Phase 4: CPU verifies both destinations                   #
+#   Result:  LEDR = 0xAA (pass) or 0xFF (fail)                #
+#                                                              #
+#   Verification checks:                                      #
+#     - Cycle-accurate performance comparison                 #
+#     - Memory contents verification (direct probe)           #
+#     - DMA IRQ assertion                                     #
+#     - DMA bus transaction counts                            #
+#     - IPC and branch prediction analysis                    #
+#                                                              #
+################################################################
+# 
+# [cycle     12] Phase 1: Initializing source data (100 words at 0x1000)
+# [cycle   1018] Phase 2: CPU memcpy START (0x1000 -> 0x2000)
+# [cycle   2524] Phase 2: CPU memcpy DONE  (1506 cycles)
+# [cycle   2529] Phase 3: DMA memcpy START (0x1000 -> 0x3000)
+# [cycle   3220] >> DMA IRQ asserted
+# [cycle   3232] Phase 3: DMA memcpy DONE  (703 cycles)
+# [cycle   3242] Phase 4: Verification
+# [cycle   6863] === RESULT: ALL PASS ===
+# 
+# ========================================================
+#   Performance Comparison (100-word transfer)
+# ========================================================
+# 
+#   Method                Cycles  Notes
+#   --------------------  ------  -----
+#   CPU memcpy (lw/sw)      1506  100x (lw+sw+addi+addi+addi+bne)
+#   DMA transfer             703  5x sw config + poll + HW engine
+# 
+#   DMA is 2.1x FASTER than CPU copy
+# 
+#   DMA advantage: CPU is FREE during transfer
+#   (In real usage, CPU does other work while DMA runs)
+# 
+# ========================================================
+#   DMA Bus Transaction Analysis
+# ========================================================
+# 
+#   DMA TL-UL GET (read)  requests: 100
+#   DMA TL-UL PUT (write) requests: 100
+#   Total DMA bus transactions:     200
+#   Expected: 100 reads + 100 writes = 200 transactions
+#   Status: CORRECT - all 100 word transfers completed via bus
+# 
+# ========================================================
+#   CPU Performance Analysis
+# ========================================================
+# 
+#   Total cycles:       6863
+#   Total instructions: 2750
+#   IPC:                0.401
+# 
+#   Cycles/word (CPU):  15.1
+#   Cycles/word (DMA):  7.0
+# 
+#   Branch mispredictions: 663
+#   Total branches:       669
+#   Misprediction rate:   99.1%
+# 
+# ========================================================
+#   Memory Verification (direct probe, 100 words)
+# ========================================================
+# 
+#   Word  SRC @0x1000   CPU @0x2000   DMA @0x3000   Expected  Status
+#   ----  -----------   -----------   -----------   --------  ------
+#   [ 0]  0x00000100    0x00000100    0x00000100    0x00000100  PASS
+#   [ 1]  0x00000101    0x00000101    0x00000101    0x00000101  PASS
+#   [ 2]  0x00000102    0x00000102    0x00000102    0x00000102  PASS
+#   [ 3]  0x00000103    0x00000103    0x00000103    0x00000103  PASS
+#   [ 4]  0x00000104    0x00000104    0x00000104    0x00000104  PASS
+#   ...   (words 5-94 checked, printing first 5 & last 5)
+#   [95]  0x0000015f    0x0000015f    0x0000015f    0x0000015f  PASS
+#   [96]  0x00000160    0x00000160    0x00000160    0x00000160  PASS
+#   [97]  0x00000161    0x00000161    0x00000161    0x00000161  PASS
+#   [98]  0x00000162    0x00000162    0x00000162    0x00000162  PASS
+#   [99]  0x00000163    0x00000163    0x00000163    0x00000163  PASS
+# 
+#   Result: 100 / 100 PASS
+#   *** ALL DATA VERIFIED CORRECT ***
+# 
+#   DMA IRQ observed: YES
+# 
+################################################################
+#                    FINAL VERIFICATION SUMMARY                #
+################################################################
+#                                                              #
+#   Memory Integrity:   100 / 100 words PASS               #
+#   Data Result:        *** ALL DATA VERIFIED CORRECT ***     #
+#   DMA IRQ:            ASSERTED (correct)                                   #
+#   DMA bus txns:       100 rd + 100 wr = 200 total           #
+#                                                              #
+################################################################
+# 
+# ** Note: $finish    : ../000_tlul/tb/soc_dma_tb.sv(222)
+#    Time: 13776 ns  Iteration: 1  Instance: /soc_dma_tb
+# End time: 22:22:44 on Mar 31,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 5

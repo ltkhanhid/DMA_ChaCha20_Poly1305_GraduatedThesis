@@ -1,0 +1,18 @@
+# vsim -c -l soc_7seg_tb.log -do "run -all; quit -f" work.soc_7seg_tb 
+# Start time: 14:35:37 on Mar 08,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'spi_sclk_o' not found in module 'soc_top_2m6s' (16th connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'spi_mosi_o' not found in module 'soc_top_2m6s' (17th connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'spi_miso_i' not found in module 'soc_top_2m6s' (18th connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'spi_cs_n_o' not found in module 'soc_top_2m6s' (19th connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'i2c_scl_io' not found in module 'soc_top_2m6s' (20th connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'i2c_sda_io' not found in module 'soc_top_2m6s' (21st connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'irq_spi_o' not found in module 'soc_top_2m6s' (22nd connection).
+# ** Error (suppressible): ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2912) Port 'irq_i2c_o' not found in module 'soc_top_2m6s' (23rd connection).
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=8, Warnings=0.
+# Error loading design
+# End time: 14:35:39 on Mar 08,2026, Elapsed time: 0:00:02
+# Errors: 8, Warnings: 0

@@ -1,0 +1,106 @@
+D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/brc.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/brc.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module brc
+
+Top level modules:
+	brc
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/memory.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/memory.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module memory
+
+Top level modules:
+	memory
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/single_cycle.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/single_cycle.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module single_cycle
+
+Top level modules:
+	single_cycle
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/alu.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/alu.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module alu
+
+Top level modules:
+	alu
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/PCplus4.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/PCplus4.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module PCplus4
+
+Top level modules:
+	PCplus4
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/mux2.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/mux2.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module mux2
+
+Top level modules:
+	mux2
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/regfile.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/regfile.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module regfile
+
+Top level modules:
+	regfile
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/control_logic.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/control_logic.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module control_logic
+
+Top level modules:
+	control_logic
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/01_bench/single_cycle_tb.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/01_bench/single_cycle_tb.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module single_cycle_tb
+
+Top level modules:
+	single_cycle_tb
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/peripherals.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/peripherals.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module peripherals
+
+Top level modules:
+	peripherals
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/pc.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/pc.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module pc
+
+Top level modules:
+	pc
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/SevenSegment.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/SevenSegment.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module SevenSegment
+
+Top level modules:
+	SevenSegment
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/lsu.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/lsu.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module lsu
+
+Top level modules:
+	lsu
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/mux3.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/mux3.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module mux3
+
+Top level modules:
+	mux3
+
+} {} {}} D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/immgen.sv {1 {vlog -work work -vopt -sv -stats=none D:/TAILIEU/chuyenngnah/CTMT/CTMT_test/single_cycle_testbench/00_src/immgen.sv
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module ImmGen
+
+Top level modules:
+	ImmGen
+
+} {} {}}

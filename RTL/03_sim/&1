@@ -1,0 +1,16 @@
+The process tried to write to a nonexistent pipe.
+The process tried to write to a nonexistent pipe.
+
+
+error writing "stdout": broken pipe
+    while executing
+"puts stdout "\n# [vsimId]\n""
+    (procedure "announce_title" line 4)
+    invoked from within
+"announce_title"
+    invoked from within
+"ncFyP12 -+"
+    (file "C:/mtitcl/vsim/vsim" line 1)
+** Fatal: Exiting VSIM license process.
+make[1]: *** [makefile:104: sim_dma_unit] Error 1
+make[1]: write error: stdout

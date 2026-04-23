@@ -1,0 +1,55 @@
+# vsim -c -l 7seg_test.log -do "run -all; quit -f" work.soc_7seg_tb 
+# Start time: 03:03:29 on Mar 01,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2685) [TFMPC] - Too few port connections for 'u_soc'.  Expected 32, found 31.
+# ** Warning: ../000_tlul/tb/soc_7seg_tb.sv(45): (vopt-2718) [TFMPC] - Missing connection for port 'irq_poly_o'.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=4.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tlul_pkg(fast)
+# Loading work.soc_7seg_tb(fast)
+# run -all
+# === SOC UART 7-SEG TEST (WITH BAUD CHECK) ===
+# [390000] Reset Released
+# 
+# --- TEST 1: Normal Operation (115200 Baud) ---
+#   [10000390000] TX -> SOC (Baud Cycles: 434): 0x31 ('1')
+# 	Display: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 ]
+# 
+# --- TEST 2: Wrong Baud Rate (9600 Baud) - Should Fail ---
+#   [20095870000] TX -> SOC (Baud Cycles: 5208): 0x32 ('2')
+# 	Display: [ 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 ]
+# 
+# --- TEST 3: Stress Test  - Should Pass ---
+#   [31241630000] TX -> SOC (Baud Cycles: 425): 0x33 ('3')
+# 	Display: [ 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 ]
+# 
+# --- TEST 4: Stress Test- Should Pass ---
+#   [41335130000] TX -> SOC (Baud Cycles: 443): 0x41 ('A')
+# 	Display: [ 0 | 0 | 0 | 0 | 1 | 0 | 3 | A ]
+# 
+# === Test Complete ===
+# ** Note: $stop    : ../000_tlul/tb/soc_7seg_tb.sv(195)
+#    Time: 51432590 ns  Iteration: 1  Instance: /soc_7seg_tb
+# Break at ../000_tlul/tb/soc_7seg_tb.sv line 195
+# Stopped at ../000_tlul/tb/soc_7seg_tb.sv line 195
+#  quit -f
+# End time: 03:03:46 on Mar 01,2026, Elapsed time: 0:00:17
+# Errors: 0, Warnings: 4

@@ -1,0 +1,13 @@
+-sv
+-timescale 1ns/100ps
+
+# TileLink Package
+../000_tlul/tlul_pkg.sv
+
+# ChaCha20 Crypto Peripheral
+../000_tlul/chacha20/chacha20_qr.sv
+../000_tlul/chacha20/chacha20_core.sv
+../000_tlul/chacha20/tlul_chacha20.sv
+
+# Testbench
+../000_tlul/chacha20/chacha20_tb.sv

@@ -1,0 +1,46 @@
+# ModelSim / QuestaSim simulation files
+*.wlf
+*.wlfe
+work/
+transcript
+vsim.wlf
+
+# Compiled simulation outputs
+*.vstdout
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# RISC-V compiled artifacts
+*.o
+*.elf
+*.hex
+*.bin
+*.map
+
+# FPGA implementation outputs
+04_FPGA_implement/**/*.jdi
+04_FPGA_implement/**/*.pin
+04_FPGA_implement/**/*.sof
+04_FPGA_implement/**/*.pof
+04_FPGA_implement/**/*.rbf
+04_FPGA_implement/**/*.rpt
+04_FPGA_implement/**/*.summary
+04_FPGA_implement/**/*.smsg
+04_FPGA_implement/**/*.flow.rpt
+04_FPGA_implement/**/db/
+04_FPGA_implement/**/incremental_db/
+04_FPGA_implement/**/simulation/
+04_FPGA_implement/**/output_files/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/

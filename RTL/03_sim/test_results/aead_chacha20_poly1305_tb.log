@@ -1,0 +1,114 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "log -r /*; run 200us; quit -f" aead_chacha20_poly1305_tb 
+# Start time: 22:38:55 on Apr 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vopt-143) Recognized 1 FSM in module "chacha20_core(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "poly1305_core(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.aead_chacha20_poly1305_tb(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# Loading work.poly1305_core(fast)
+# log -r /*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: ltkha  Hostname: LTK  ProcessID: 6608
+#           Attempting to use alternate WLF file "./wlftcgk85s".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftcgk85s
+#  run 200us
+# 
+################################################################
+#  AEAD_CHACHA20_POLY1305  Testbench  (RFC 8439)              #
+################################################################
+# 
+# ================================================================
+# TEST 3: Poly1305 Key Generation (RFC 8439 Section 2.6.2)
+# ================================================================
+#   Verifying one-time key (32 bytes)...
+#   [PASS] OTK (32 bytes, RFC 8439 Section 2.6.2)            
+#     OTK bytes (hex):
+#       8a d5 a0 8b 90 5f 81 cc 81 50 40 27 4a b2 94 71
+#       a8 33 b6 37 e3 fd 0d a5 08 db b8 e2 fd d1 a6 46
+# 
+# ================================================================
+# TEST 1: AEAD_CHACHA20_POLY1305 Encryption (RFC 8439 Section 2.8.2)
+# ================================================================
+# 
+#   --- Step 1: Poly1305 One-Time Key Generation (counter=0) ---
+#   [PASS] OTK_r (Poly1305 key r part)                       
+#          Expected: 8455e9a4557ab609af47b42d252bac7b
+#          Got:      8455e9a4557ab609af47b42d252bac7b
+#     OTK r = 8455e9a4557ab609af47b42d252bac7b
+#     OTK s = ff53d53e7875932aebd9751073d6e10a
+# 
+#   --- Step 2: ChaCha20 Encryption (counter=1,2) ---
+#   Verifying ciphertext (114 bytes)...
+#   [PASS] Ciphertext (114 bytes)                            
+# 
+#   --- Step 3: Poly1305 MAC Computation ---
+#     MAC data length = 160 bytes (10 blocks)
+#     MAC data[0..15]   = 50 51 52 53 c0 c1 c2 c3 c4 c5 c6 c7 00 00 00 00
+#     MAC data[144..159] = 0c 00 00 00 00 00 00 00 72 00 00 00 00 00 00 00
+# 
+#   --- Step 4: Tag Verification ---
+#   [PASS] AEAD Tag (RFC 8439 Section 2.8.2)                 
+#          Expected: 910660d0cb2e907e6ae2094f590be11a
+#          Got:      910660d0cb2e907e6ae2094f590be11a
+# 
+# ================================================================
+# TEST 2: AEAD_CHACHA20_POLY1305 Decryption (RFC 8439 Appendix A.5)
+# ================================================================
+# 
+#   --- Step 1: OTK Generation (counter=0) ---
+#   [PASS] OTK_r (A.5)                                       
+#          Expected: afec8fa1b64bb19589dee45ca94af0bd
+#          Got:      afec8fa1b64bb19589dee45ca94af0bd
+#   [PASS] OTK_s (A.5)                                       
+#          Expected: aa7215261ea2c0db63f554c0508f4726
+#          Got:      aa7215261ea2c0db63f554c0508f4726
+#     OTK r = afec8fa1b64bb19589dee45ca94af0bd
+#     OTK s = aa7215261ea2c0db63f554c0508f4726
+# 
+#   --- Step 2: MAC Tag Verification ---
+#     MAC data length = 304 bytes (19 blocks)
+#   [PASS] AEAD Tag (Appendix A.5 Decryption)                
+#          Expected: 381f85a1fe36233922bb0c89679dadee
+#          Got:      381f85a1fe36233922bb0c89679dadee
+# 
+#   --- Step 3: Decryption Sanity Check (first 16 bytes) ---
+#     Decrypted first 16 bytes:
+#     49 6e 74 65 72 6e 65 74 2d 44 72 61 66 74 73 20
+#   [PASS] Decrypted starts with 'Inte' (0x49 6e 74 65)      
+# 
+################################################################
+#  SUMMARY: 8 tests, 8 passed, 0 failed
+#  >>> ALL TESTS PASSED <<<
+################################################################
+# 
+# ** Note: $finish    : ../000_tlul/tb/aead_chacha20_poly1305_tb.sv(925)
+#    Time: 10750 ns  Iteration: 0  Instance: /aead_chacha20_poly1305_tb
+# End time: 22:38:55 on Apr 06,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 5

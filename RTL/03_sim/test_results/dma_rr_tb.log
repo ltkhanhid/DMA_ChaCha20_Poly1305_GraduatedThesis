@@ -1,0 +1,171 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run 100us; quit -f" dma_rr_tb 
+# Start time: 22:40:49 on Apr 06,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_rr_tb(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_tlul_master(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast__1)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.dma_rr_tb(fast)
+# Loading work.tlul_pkg(fast)
+# Loading work.tlul_dma(fast)
+# Loading work.dma_controller(fast)
+# Loading work.dma_channel(fast)
+# Loading work.dma_channel(fast__1)
+# Loading work.dma_arbiter(fast)
+# Loading work.dma_tlul_master(fast)
+# run 100us
+# 
+################################################################
+#                                                              #
+#   DMA Round-Robin Arbitration Verification Testbench        #
+#   Module Under Test: dma_arbiter (inside tlul_dma)          #
+#                                                              #
+#   Arbitration Policy: Round-Robin per-word fairness         #
+#   When both channels request bus access, grants alternate    #
+#   between CH0 and CH1 on every word transfer (READ+WRITE).  #
+#                                                              #
+#   Test Plan:                                                #
+#     TC1: Equal Simultaneous   (CH0=4, CH1=4 words)          #
+#     TC2: Unequal Concurrent   (CH0=8, CH1=4 words)          #
+#     TC3: Staggered Start      (CH0 head start, then CH1)    #
+#     TC4: Single Channel       (CH1 only, 4 words)           #
+#     TC5: Restart During Run   (CH0 done+restart w/ CH1)     #
+#                                                              #
+#   Verification Metrics:                                     #
+#     - Per-channel grant counts                              #
+#     - Strict alternation in overlap window                  #
+#     - Max imbalance (fairness bound)                        #
+#     - Destination data integrity                            #
+#                                                              #
+################################################################
+# 
+# 
+# ================================================================
+#   TC1: Equal Simultaneous  (4+4 words)
+# ================================================================
+#   Purpose: Both channels start simultaneously with equal
+#            transfer sizes. Arbiter must alternate fairly.
+#   Expected: Strict CH0-CH1-CH0-CH1... alternation.
+# 
+# [DBG] CH0 done after 9 polls  (t=1550000)
+# [DBG] CH1 done after 1 polls  (t=1630000)
+# [MON] grant_log [0,1,0,1,0,1,0,1]
+# [MON] CH0_grants=4    CH1_grants=4    max_imbalance=1
+# [PASS] TC1: grants  CH0=4  CH1=4  (exp 4/4)
+# [PASS] TC1: strict RR alternation in overlap window
+# [PASS] TC1_fair: max_imbalance=1 (Γ?ñ 2 allowed)
+# [PASS] TC1_CH0_data: 4 words correct
+# [PASS] TC1_CH1_data: 4 words correct
+# 
+# ================================================================
+#   TC2: Unequal Concurrent  (CH0=8, CH1=4 words)
+# ================================================================
+#   Purpose: CH0 has more words than CH1. After CH1 finishes,
+#            CH0 should get all remaining grants without delay.
+#   Expected: Alternation during overlap, then CH0-only tail.
+# 
+# [DBG] CH0 done after 16 polls  (t=3990000)
+# [DBG] CH1 done after 1 polls  (t=4070000)
+# [MON] grant_log [0,1,0,1,0,1,0,1,0,0,0,0]
+# [MON] CH0_grants=8    CH1_grants=4    max_imbalance=4
+# [PASS] TC2: grants  CH0=8  CH1=4  (exp 8/4)
+# [PASS] TC2: strict RR alternation in overlap window
+# [PASS] TC2: CH0 solo tail = 4 grants (Γ?Ñ 4 expected)
+# [PASS] TC2_CH0_data: 8 words correct
+# [PASS] TC2_CH1_data: 4 words correct
+# 
+# ================================================================
+#   TC3: Staggered Start  (CH0 head=2 words, CH1 joins later)
+# ================================================================
+#   Purpose: CH0 starts first and completes 2+ words before
+#            CH1 is enabled. Once CH1 joins, strict alternation.
+# 
+# [DBG] TC3: Γ?Ñ2 CH0 words done at t=5390000; enabling CH1
+# [DBG] CH0 done after 7 polls  (t=6030000)
+# [DBG] CH1 done after 2 polls  (t=6190000)
+# [MON] grant_log [0,0,0,0,1,0,1,0,1,1]
+# [MON] CH0_grants=6    CH1_grants=4    max_imbalance=4
+# [PASS] TC3: grants  CH0=6  CH1=4  (exp 6/4)
+# [PASS] TC3: strict RR alternation in overlap window
+# [DBG] TC3: measured CH0 head-start = 4 word(s)
+# [PASS] TC3: head-start = 4 (Γ?Ñ 2)
+# [PASS] TC3_CH0_data: 6 words correct
+# [PASS] TC3_CH1_data: 4 words correct
+# 
+# ================================================================
+#   TC4: Single Channel  (CH1 only, 4 words)
+# ================================================================
+#   Purpose: Only CH1 is active. CH0 disabled.
+#            All grants must go to CH1, no starvation.
+# 
+# [DBG] CH1 done after 7 polls  (t=7510000)
+# [MON] grant_log [1,1,1,1]
+# [MON] CH0_grants=0    CH1_grants=4    max_imbalance=4
+# [PASS] TC4: all 4 grants went to CH1, CH0 got none
+# [PASS] TC4_data: 4 words correct
+# 
+# ================================================================
+#   TC5: Restart During Concurrent
+# ================================================================
+#   CH0_a=4 + CH1=8 words run concurrently.
+#   After CH0_a finishes, reconfigure and re-enable CH0_b=4.
+#   Round-robin must resume correctly after the restart.
+# 
+# [DBG] CH0 done after 9 polls  (t=9310000)
+# [DBG] TC5: CH0_a finished at t=9310000; reconfiguring CH0_b
+# [DBG] CH0 done after 8 polls  (t=10350000)
+# [DBG] CH1 done after 1 polls  (t=10430000)
+# [MON] grant_log [0,1,0,1,0,1,0,1,1,1,1,1,0,0,0,0]
+# [MON] CH0_grants=8    CH1_grants=8    max_imbalance=4
+# [PASS] TC5: grants  CH0=8  CH1=8  (exp 8/8)
+# [PASS] TC5_CH0a_data: 4 words correct
+# [PASS] TC5_CH1_data: 8 words correct
+# [PASS] TC5_CH0b_data: 4 words correct
+# [DBG] TC5: longest same-channel run = 5
+# [PASS] TC5: max same-channel run = 5 (no unbounded starvation)
+# 
+################################################################
+#                    FINAL TEST SUMMARY                        #
+################################################################
+#                                                              #
+#   Total Checks : 22                                         #
+#   Passed       : 22                                         #
+#   Failed       : 0                                          #
+#                                                              #
+#   Result: *** ALL TESTS PASSED ***                          #
+#                                                              #
+#   TC1 Equal Simultaneous  : grant alternation verified       #
+#   TC2 Unequal Concurrent  : CH0 solo tail verified           #
+#   TC3 Staggered Start     : head-start & late-join verified  #
+#   TC4 Single Channel      : no starvation verified           #
+#   TC5 Restart During Run  : resume after restart verified    #
+#                                                              #
+################################################################
+# 
+# ** Note: $finish    : ../000_tlul/dma/dma_rr_tb.sv(962)
+#    Time: 10870 ns  Iteration: 1  Instance: /dma_rr_tb
+# End time: 22:40:50 on Apr 06,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1

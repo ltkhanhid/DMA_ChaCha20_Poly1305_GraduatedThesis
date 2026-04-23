@@ -1,0 +1,8 @@
+-sv
+-timescale 1ns/100ps
+
+# AEAD corner cases (12 tests: pt_len, aad_len, tag sensitivity)
+../000_tlul/chacha20/chacha20_qr.sv
+../000_tlul/chacha20/chacha20_core.sv
+../000_tlul/poly1305/poly1305_core.sv
+../000_tlul/tb/aead_corner_tb.sv

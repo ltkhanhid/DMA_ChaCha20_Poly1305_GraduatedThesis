@@ -1,0 +1,190 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+!s12c _opt1
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+!s11f MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z2 dD:/TAILIEU/chuyenngnah/DATN/RTL/000_tlul/sim
+T_opt
+!s110 1769309956
+V>J63ohNh8UdTEka4`K@=I0
+04 6 4 work i2c_tb fast 0
+=1-f8b54d90d981-69758703-171-6be4
+R1
+Z3 !s12f OEM100
+Z4 !s12b OEM100
+Z5 !s124 OEM100
+Z6 o-quiet -auto_acc_if_foreign -work work_i2c
+Z7 tCvgOpt 0
+n@_opt
+Z8 OL;O;2024.1;79
+T_opt1
+!s110 1769309523
+VfYNHbnEn`UlzGYR@e]SZP1
+04 13 4 work i2c_simple_tb fast 0
+=1-f8b54d90d981-69758553-2a2-638c
+R1
+R3
+R4
+R5
+R6
+R7
+n@_opt1
+R8
+R2
+vi2c_master
+Z9 2../i2c_master.sv|../tlul_i2c.sv|../tb/i2c_tb.sv|../tlul_pkg.sv
+Z10 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z11 !s110 1769309954
+!i10b 1
+!s100 zBfz70]FC:i5eEFGJZKf[0
+I9E`O2d@O@FSMzJYR0cE[@0
+S1
+R2
+w1769309937
+8../i2c_master.sv
+F../i2c_master.sv
+!i122 14
+L0 8 385
+Z12 VDg1SIo80bB@j0V0VzS_@n1
+Z13 OL;L;2024.1;79
+r1
+!s85 0
+31
+Z14 !s108 1769309953.000000
+Z15 !s107 ../tlul_pkg.sv|../tb/i2c_tb.sv|../tlul_i2c.sv|../i2c_master.sv|
+Z16 !s90 -work|work_i2c|+acc|-sv|../i2c_master.sv|../tlul_i2c.sv|../tb/i2c_tb.sv|../tlul_pkg.sv|
+!i113 0
+Z17 o-work work_i2c +acc -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R7
+vi2c_simple_tb
+2../i2c_master.sv|../tb/i2c_simple_tb.sv
+R10
+!s110 1769309522
+!i10b 1
+!s100 Z:RW@G^28l2I0bg71TF5S0
+IEDAd5oHzlAM:3T3hb5;910
+S1
+R2
+w1769309516
+8../tb/i2c_simple_tb.sv
+F../tb/i2c_simple_tb.sv
+!i122 7
+L0 6 145
+R12
+R13
+r1
+!s85 0
+31
+!s108 1769309522.000000
+!s107 ../tb/i2c_simple_tb.sv|../i2c_master.sv|
+!s90 -work|work_i2c|+acc|-sv|../i2c_master.sv|../tb/i2c_simple_tb.sv|
+!i113 0
+R17
+R7
+vi2c_tb
+R9
+R10
+R11
+!i10b 1
+!s100 03U:lhGVD:AA]BdE4>;Y:0
+INQA<aY=5;@YU7Dd`99mJH3
+S1
+R2
+w1769309910
+8../tb/i2c_tb.sv
+F../tb/i2c_tb.sv
+!i122 14
+L0 8 655
+R12
+R13
+r1
+!s85 0
+31
+R14
+R15
+R16
+!i113 0
+R17
+R7
+vtlul_i2c
+R9
+R10
+DXx4 work 8 tlul_pkg 0 22 >k_HiWMU0:GDil18LNQMa2
+R11
+!i10b 1
+!s100 2aW[IEC55B^IHA6E>Og>?1
+IGNI@@YnI:e>`igfoKV:ge2
+S1
+R2
+w1769309868
+8../tlul_i2c.sv
+F../tlul_i2c.sv
+!i122 14
+L0 14 259
+R12
+R13
+r1
+!s85 0
+31
+R14
+R15
+R16
+!i113 0
+R17
+R7
+Xtlul_pkg
+R9
+R10
+R11
+!i10b 1
+!s100 XTL^O:PDRl4Pif_OIVcVo3
+I>k_HiWMU0:GDil18LNQMa2
+S1
+R2
+w1765736915
+8../tlul_pkg.sv
+F../tlul_pkg.sv
+!i122 14
+L0 1 0
+V>k_HiWMU0:GDil18LNQMa2
+R13
+r1
+!s85 0
+31
+R14
+R15
+R16
+!i113 0
+R17
+R7

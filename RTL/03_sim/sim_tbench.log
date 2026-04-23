@@ -1,0 +1,153 @@
+# vsim -c tbench -voptargs="+acc" -l sim_tbench.log -wlf vsim.wlf -do "log -r /*; run -all; quit -f" 
+# Start time: 11:44:02 on Dec 28,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tbench_sv_unit(fast)
+# Loading work.tbench(fast)
+# Loading work.pipelined(fast)
+# Loading work.IF(fast)
+# Loading work.branch_predictor(fast)
+# Loading work.PCplus4(fast)
+# Loading work.pc(fast)
+# Loading work.instr_mem(fast)
+# Loading work.IF_ID_reg(fast)
+# Loading work.ID(fast)
+# Loading work.regfile(fast)
+# Loading work.ImmGen(fast)
+# Loading work.control_logic(fast)
+# Loading work.ID_EX_reg(fast)
+# Loading work.EX(fast)
+# Loading work.mux2(fast)
+# Loading work.mux4_fw(fast)
+# Loading work.alu(fast)
+# Loading work.cla_32bit(fast)
+# Loading work.cla_4bit(fast)
+# Loading work.fa(fast)
+# Loading work.brc(fast)
+# Loading work.EX_MEM_reg(fast)
+# Loading work.MEM(fast)
+# Loading work.lsu(fast)
+# Loading work.memory(fast)
+# Loading work.peripherals(fast)
+# Loading work.SevenSegment(fast)
+# Loading work.MEM_WB_reg(fast)
+# Loading work.WB(fast)
+# Loading work.mux3_wb(fast)
+# Loading work.hazard_detection(fast)
+# Loading work.forwarding_unit(fast)
+# Loading work.driver(fast)
+# Loading work.scoreboard(fast)
+# log -r /*
+#  run -all
+# 
+# PIPELINE - ISA tests
+# 
+# add......PASS
+# 
+# addi.....PASS
+# 
+# sub......PASS
+# 
+# and......PASS
+# 
+# andi.....PASS
+# 
+# or.......PASS
+# 
+# ori......PASS
+# 
+# xor......PASS
+# 
+# xori.....PASS
+# 
+# slt......PASS
+# 
+# slti.....PASS
+# 
+# sltu.....PASS
+# 
+# sltiu....PASS
+# 
+# sll......PASS
+# 
+# slli.....PASS
+# 
+# srl......PASS
+# 
+# srli.....PASS
+# 
+# sra......PASS
+# 
+# srai.....PASS
+# 
+# lw.......PASS
+# 
+# lh.......PASS
+# 
+# lhu......PASS
+# 
+# lb.......PASS
+# 
+# lbu......PASS
+# 
+# sw.......PASS
+# 
+# sh.......PASS
+# 
+# sb.......PASS
+# 
+# auipc....PASS
+# 
+# lui......PASS
+# 
+# beq......PASS
+# 
+# bne......PASS
+# 
+# blt......PASS
+# 
+# bltu.....PASS
+# 
+# bge......PASS
+# 
+# bgeu.....PASS
+# 
+# jal......PASS
+# 
+# jalr.....PASS
+# 
+# malgn....PASS
+# 
+# iosw.....PASS
+# 
+# 
+# =================== Result ===================
+# Total Clock Cycles Executed = 7149
+# Total Instructions Executed = 4807
+# Total Branch Instructions   = 1602
+# Total Branch Mispredictions = 487
+# 
+# ----------------------------------------------
+# Instruction Per Cycle (IPC) = 0.67
+# Branch Misprediction Rate   = 30.40 %
+# 
+# END of ISA tests
+# 
+# ** Note: $finish    : D:/TAILIEU/chuyenngnah/DoAn2/RTL/01_bench/scoreboard.sv(85)
+#    Time: 28648 ns  Iteration: 1  Instance: /tbench/scoreboard
+# End time: 11:44:04 on Dec 28,2025, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0

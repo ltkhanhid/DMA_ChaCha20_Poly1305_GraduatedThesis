@@ -1,0 +1,262 @@
+#-----------------------------------------------------------------------------
+# File: soc_fpga_pins.qsf
+# Description: Pin Assignments for RISC-V SoC on DE1-SoC (Cyclone V)
+#-----------------------------------------------------------------------------
+# Target Device: 5CSEMA5F31C6 (DE1-SoC Board)
+#-----------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------
+# Device Settings
+#-----------------------------------------------------------------------------
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEMA5F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY soc_top_fpga
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
+set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
+
+#-----------------------------------------------------------------------------
+# Project Settings
+#-----------------------------------------------------------------------------
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+
+#-----------------------------------------------------------------------------
+# Compilation Settings
+#-----------------------------------------------------------------------------
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+
+#-----------------------------------------------------------------------------
+# Clock Input
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AF14 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
+
+#-----------------------------------------------------------------------------
+# Push Buttons (Active Low)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AA14 -to KEY[0]
+set_location_assignment PIN_AA15 -to KEY[1]
+set_location_assignment PIN_W15  -to KEY[2]
+set_location_assignment PIN_Y16  -to KEY[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[*]
+
+#-----------------------------------------------------------------------------
+# Slide Switches
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AB12 -to SW[0]
+set_location_assignment PIN_AC12 -to SW[1]
+set_location_assignment PIN_AF9  -to SW[2]
+set_location_assignment PIN_AF10 -to SW[3]
+set_location_assignment PIN_AD11 -to SW[4]
+set_location_assignment PIN_AD12 -to SW[5]
+set_location_assignment PIN_AE11 -to SW[6]
+set_location_assignment PIN_AC9  -to SW[7]
+set_location_assignment PIN_AD10 -to SW[8]
+set_location_assignment PIN_AE12 -to SW[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[*]
+
+#-----------------------------------------------------------------------------
+# Red LEDs
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_V16  -to LEDR[0]
+set_location_assignment PIN_W16  -to LEDR[1]
+set_location_assignment PIN_V17  -to LEDR[2]
+set_location_assignment PIN_V18  -to LEDR[3]
+set_location_assignment PIN_W17  -to LEDR[4]
+set_location_assignment PIN_W19  -to LEDR[5]
+set_location_assignment PIN_Y19  -to LEDR[6]
+set_location_assignment PIN_W20  -to LEDR[7]
+set_location_assignment PIN_W21  -to LEDR[8]
+set_location_assignment PIN_Y21  -to LEDR[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[*]
+
+#-----------------------------------------------------------------------------
+# Green LEDs (directly connect to LEDG - might need remap for actual board)
+#-----------------------------------------------------------------------------
+# Note: DE1-SoC only has red LEDs. Map LEDG to GPIO or unused pins
+# For DE2-115 or similar boards, use actual green LED pins
+# Here using additional GPIO pins as green LED outputs
+set_location_assignment PIN_AE26 -to LEDG[0]
+set_location_assignment PIN_AE27 -to LEDG[1]
+set_location_assignment PIN_AF28 -to LEDG[2]
+set_location_assignment PIN_AG28 -to LEDG[3]
+set_location_assignment PIN_AH28 -to LEDG[4]
+set_location_assignment PIN_AH27 -to LEDG[5]
+set_location_assignment PIN_AJ27 -to LEDG[6]
+set_location_assignment PIN_AK29 -to LEDG[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDG[*]
+
+#-----------------------------------------------------------------------------
+# 7-Segment Display 0 (rightmost)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AE26 -to HEX0[0]
+set_location_assignment PIN_AE27 -to HEX0[1]
+set_location_assignment PIN_AE28 -to HEX0[2]
+set_location_assignment PIN_AG27 -to HEX0[3]
+set_location_assignment PIN_AF28 -to HEX0[4]
+set_location_assignment PIN_AG28 -to HEX0[5]
+set_location_assignment PIN_AH28 -to HEX0[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[*]
+
+#-----------------------------------------------------------------------------
+# 7-Segment Display 1
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AJ29 -to HEX1[0]
+set_location_assignment PIN_AH29 -to HEX1[1]
+set_location_assignment PIN_AH30 -to HEX1[2]
+set_location_assignment PIN_AG30 -to HEX1[3]
+set_location_assignment PIN_AF29 -to HEX1[4]
+set_location_assignment PIN_AF30 -to HEX1[5]
+set_location_assignment PIN_AD27 -to HEX1[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[*]
+
+#-----------------------------------------------------------------------------
+# 7-Segment Display 2
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AB23 -to HEX2[0]
+set_location_assignment PIN_AE29 -to HEX2[1]
+set_location_assignment PIN_AD29 -to HEX2[2]
+set_location_assignment PIN_AC28 -to HEX2[3]
+set_location_assignment PIN_AD30 -to HEX2[4]
+set_location_assignment PIN_AC29 -to HEX2[5]
+set_location_assignment PIN_AC30 -to HEX2[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[*]
+
+#-----------------------------------------------------------------------------
+# 7-Segment Display 3
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AD26 -to HEX3[0]
+set_location_assignment PIN_AC27 -to HEX3[1]
+set_location_assignment PIN_AD25 -to HEX3[2]
+set_location_assignment PIN_AC25 -to HEX3[3]
+set_location_assignment PIN_AB28 -to HEX3[4]
+set_location_assignment PIN_AB25 -to HEX3[5]
+set_location_assignment PIN_AB22 -to HEX3[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[*]
+
+#-----------------------------------------------------------------------------
+# 7-Segment Display 4
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AA24 -to HEX4[0]
+set_location_assignment PIN_Y23  -to HEX4[1]
+set_location_assignment PIN_Y24  -to HEX4[2]
+set_location_assignment PIN_W22  -to HEX4[3]
+set_location_assignment PIN_W24  -to HEX4[4]
+set_location_assignment PIN_V23  -to HEX4[5]
+set_location_assignment PIN_W25  -to HEX4[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[*]
+
+#-----------------------------------------------------------------------------
+# 7-Segment Display 5 (leftmost)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_V25  -to HEX5[0]
+set_location_assignment PIN_AA28 -to HEX5[1]
+set_location_assignment PIN_Y27  -to HEX5[2]
+set_location_assignment PIN_AB27 -to HEX5[3]
+set_location_assignment PIN_AB26 -to HEX5[4]
+set_location_assignment PIN_AA26 -to HEX5[5]
+set_location_assignment PIN_AA25 -to HEX5[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[*]
+
+#-----------------------------------------------------------------------------
+# UART (GPIO Header JP1)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AC18 -to UART_RX
+set_location_assignment PIN_Y17  -to UART_TX
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to UART_RX
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to UART_TX
+
+#-----------------------------------------------------------------------------
+# SPI Interface (GPIO Header JP1)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AK16 -to SPI_SCLK
+set_location_assignment PIN_AJ16 -to SPI_MOSI
+set_location_assignment PIN_AJ17 -to SPI_MISO
+set_location_assignment PIN_AK18 -to SPI_CS_N
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SPI_*
+
+#-----------------------------------------------------------------------------
+# I2C Interface (GPIO Header JP1)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AK19 -to I2C_SCL
+set_location_assignment PIN_AJ19 -to I2C_SDA
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to I2C_*
+# I2C needs open-drain with pull-up
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to I2C_SCL
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to I2C_SDA
+
+#-----------------------------------------------------------------------------
+# Debug Outputs (Optional - map to GPIO)
+#-----------------------------------------------------------------------------
+set_location_assignment PIN_AJ21 -to DEBUG_PC_VALID
+set_location_assignment PIN_AK21 -to DEBUG_MEM_ACCESS
+set_location_assignment PIN_AH23 -to DEBUG_HEARTBEAT
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DEBUG_*
+
+#-----------------------------------------------------------------------------
+# Source Files
+#-----------------------------------------------------------------------------
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/soc_top_fpga.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/soc_top_upgraded.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/pipelined_tl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_xbar_6s.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_adapter_mem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_adapter_peri.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_uart_bridge.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_spi.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_i2c.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/tlul_dma.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/ID_EX_reg_tl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/EX_MEM_reg_tl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/MEM_WB_reg_tl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/MEM_tl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/hazard_detection_tl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/uart_rx_32bit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/uart_tx_32bit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/uart_byte_rx.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../000_tlul/uart_byte_tx.sv
+
+# CPU core files
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/IF.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/ID.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/EX.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/MEM.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/WB.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/IF_ID_reg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/ID_EX_reg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/EX_MEM_reg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/MEM_WB_reg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/alu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/brc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/regfile.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/immgen.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/control_logic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/forwarding_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/hazard_detection.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/branch_predictor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/pc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/mux2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/mux3.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/mux4.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/mux3_wb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/mux4_fw.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/cla_32bit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/cla_4bit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/fa.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/SevenSegment.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/memory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/peripherals.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/lsu.sv
+
+# Timing constraints
+set_global_assignment -name SDC_FILE soc_fpga.sdc
+
+#-----------------------------------------------------------------------------
+# End of Pin Assignments
+#-----------------------------------------------------------------------------

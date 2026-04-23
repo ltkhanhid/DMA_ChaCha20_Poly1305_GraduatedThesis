@@ -1,0 +1,182 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run -all; quit -f" chacha20_tb 
+# Start time: 22:23:32 on Mar 31,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vopt-143) Recognized 1 FSM in module "chacha20_core(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.chacha20_tb(fast)
+# Loading work.tlul_pkg(fast)
+# Loading work.tlul_chacha20(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# run -all
+# 
+# [CHACHA_TB] @130 ns | ################################################################
+# [CHACHA_TB] @130 ns | #                                                              #
+# [CHACHA_TB] @130 ns | #    ChaCha20 TL-UL Peripheral -- Verification Testbench       #
+# [CHACHA_TB] @130 ns | #    Module Under Test: tlul_chacha20                          #
+# [CHACHA_TB] @130 ns | #                                                              #
+# [CHACHA_TB] @130 ns | #    Sub-modules : chacha20_core, chacha20_qr (x4)             #
+# [CHACHA_TB] @130 ns | #    Bus Protocol: TileLink Uncached Lightweight (TL-UL)       #
+# [CHACHA_TB] @130 ns | #    Clock Period: 20 ns (50 MHz)                                #
+# [CHACHA_TB] @130 ns | #    Test Vector: RFC 8439 Section 2.3.2                       #
+# [CHACHA_TB] @130 ns | #                                                              #
+# [CHACHA_TB] @130 ns | #    Test Plan:                                                #
+# [CHACHA_TB] @130 ns | #      1. Keystream Verification  -- RFC 8439 test vector      #
+# [CHACHA_TB] @130 ns | #      2. Encryption XOR          -- CT[i] = PT[i] XOR KS[i]  #
+# [CHACHA_TB] @130 ns | #      3. Counter Auto-Increment  -- +1 per 64-byte block      #
+# [CHACHA_TB] @130 ns | #      4. IRQ Sticky + W1C        -- done interrupt control    #
+# [CHACHA_TB] @130 ns | #      5. Register Read-Back      -- key/nonce/counter/status  #
+# [CHACHA_TB] @130 ns | #                                                              #
+# [CHACHA_TB] @130 ns | ################################################################
+# 
+# [CHACHA_TB] @130 ns | ================================================================
+# [CHACHA_TB] @130 ns | INFO  | TEST 1: Keystream Verification (RFC 8439 Section 2.3.2)
+# [CHACHA_TB] @130 ns | ================================================================
+# [CHACHA_TB] @130 ns | INFO  | Purpose : CT = PT XOR KS; with PT=0 => CT = KS (keystream)
+# [CHACHA_TB] @130 ns | INFO  | Ref     : RFC 8439 Section 2.3.2 official test vector
+# 
+# [CHACHA_TB] @130 ns | CFG   | Key[0..3] : 03020100 07060504 0b0a0908 0f0e0d0c
+# [CHACHA_TB] @130 ns | CFG   | Key[4..7] : 13121110 17161514 1b1a1918 1f1e1d1c
+# [CHACHA_TB] @130 ns | CFG   | Nonce     : 09000000 4a000000 00000000
+# [CHACHA_TB] @130 ns | CFG   | Counter   : 0x00000001
+# [CHACHA_TB] @130 ns | CFG   | Plaintext : 0x00000000 (all zeros x16)
+# [CHACHA_TB] @2370 ns | INFO  | Writing registers + triggering encryption (CONTROL <- 1)
+# [CHACHA_TB] @2930 ns | INFO  | Computation complete. Verifying 16 keystream words:
+# [CHACHA_TB] @4210 ns | PASS  | KS[0]                                exp=0xe4e7f110  got=0xe4e7f110
+# [CHACHA_TB] @4210 ns | PASS  | KS[1]                                exp=0x15593bd1  got=0x15593bd1
+# [CHACHA_TB] @4210 ns | PASS  | KS[2]                                exp=0x1fdd0f50  got=0x1fdd0f50
+# [CHACHA_TB] @4210 ns | PASS  | KS[3]                                exp=0xc47120a3  got=0xc47120a3
+# [CHACHA_TB] @4210 ns | PASS  | KS[4]                                exp=0xc7f4d1c7  got=0xc7f4d1c7
+# [CHACHA_TB] @4210 ns | PASS  | KS[5]                                exp=0x0368c033  got=0x0368c033
+# [CHACHA_TB] @4210 ns | PASS  | KS[6]                                exp=0x9aaa2204  got=0x9aaa2204
+# [CHACHA_TB] @4210 ns | PASS  | KS[7]                                exp=0x4e6cd4c3  got=0x4e6cd4c3
+# [CHACHA_TB] @4210 ns | PASS  | KS[8]                                exp=0x466482d2  got=0x466482d2
+# [CHACHA_TB] @4210 ns | PASS  | KS[9]                                exp=0x09aa9f07  got=0x09aa9f07
+# [CHACHA_TB] @4210 ns | PASS  | KS[10]                               exp=0x05d7c214  got=0x05d7c214
+# [CHACHA_TB] @4210 ns | PASS  | KS[11]                               exp=0xa2028bd9  got=0xa2028bd9
+# [CHACHA_TB] @4210 ns | PASS  | KS[12]                               exp=0xd19c12b5  got=0xd19c12b5
+# [CHACHA_TB] @4210 ns | PASS  | KS[13]                               exp=0xb94e16de  got=0xb94e16de
+# [CHACHA_TB] @4210 ns | PASS  | KS[14]                               exp=0xe883d0cb  got=0xe883d0cb
+# [CHACHA_TB] @4210 ns | PASS  | KS[15]                               exp=0x4e3c50a2  got=0x4e3c50a2
+# 
+# [CHACHA_TB] @4210 ns | ================================================================
+# [CHACHA_TB] @4210 ns | INFO  | TEST 2: Encryption XOR Verification
+# [CHACHA_TB] @4210 ns | ================================================================
+# [CHACHA_TB] @4210 ns | INFO  | Purpose : Verify CT[i] = PT[i] XOR KS[i] with non-zero plaintext
+# [CHACHA_TB] @4210 ns | INFO  | Formula : CT[i] = 0xDEADBEEF XOR KS[i]
+# 
+# [CHACHA_TB] @4210 ns | CFG   | Key[0..3] : 03020100 07060504 0b0a0908 0f0e0d0c
+# [CHACHA_TB] @4210 ns | CFG   | Key[4..7] : 13121110 17161514 1b1a1918 1f1e1d1c
+# [CHACHA_TB] @4210 ns | CFG   | Nonce     : 09000000 4a000000 00000000
+# [CHACHA_TB] @4210 ns | CFG   | Counter   : 0x00000001
+# [CHACHA_TB] @4210 ns | CFG   | Plaintext : 0xDEADBEEF (all 16 words)
+# [CHACHA_TB] @6450 ns | INFO  | Writing registers + triggering encryption (CONTROL <- 1)
+# [CHACHA_TB] @7010 ns | INFO  | Computation complete. Verifying CT[i] = 0xDEADBEEF XOR KS[i]:
+# [CHACHA_TB] @8290 ns | PASS  | CT[0] (0xDEADBEEF^KS[0])             exp=0x3a4a4fff  got=0x3a4a4fff
+# [CHACHA_TB] @8290 ns | PASS  | CT[1] (0xDEADBEEF^KS[1])             exp=0xcbf4853e  got=0xcbf4853e
+# [CHACHA_TB] @8290 ns | PASS  | CT[2] (0xDEADBEEF^KS[2])             exp=0xc170b1bf  got=0xc170b1bf
+# [CHACHA_TB] @8290 ns | PASS  | CT[3] (0xDEADBEEF^KS[3])             exp=0x1adc9e4c  got=0x1adc9e4c
+# [CHACHA_TB] @8290 ns | PASS  | CT[4] (0xDEADBEEF^KS[4])             exp=0x19596f28  got=0x19596f28
+# [CHACHA_TB] @8290 ns | PASS  | CT[5] (0xDEADBEEF^KS[5])             exp=0xddc57edc  got=0xddc57edc
+# [CHACHA_TB] @8290 ns | PASS  | CT[6] (0xDEADBEEF^KS[6])             exp=0x44079ceb  got=0x44079ceb
+# [CHACHA_TB] @8290 ns | PASS  | CT[7] (0xDEADBEEF^KS[7])             exp=0x90c16a2c  got=0x90c16a2c
+# [CHACHA_TB] @8290 ns | PASS  | CT[8] (0xDEADBEEF^KS[8])             exp=0x98c93c3d  got=0x98c93c3d
+# [CHACHA_TB] @8290 ns | PASS  | CT[9] (0xDEADBEEF^KS[9])             exp=0xd70721e8  got=0xd70721e8
+# [CHACHA_TB] @8290 ns | PASS  | CT[10] (0xDEADBEEF^KS[10])           exp=0xdb7a7cfb  got=0xdb7a7cfb
+# [CHACHA_TB] @8290 ns | PASS  | CT[11] (0xDEADBEEF^KS[11])           exp=0x7caf3536  got=0x7caf3536
+# [CHACHA_TB] @8290 ns | PASS  | CT[12] (0xDEADBEEF^KS[12])           exp=0x0f31ac5a  got=0x0f31ac5a
+# [CHACHA_TB] @8290 ns | PASS  | CT[13] (0xDEADBEEF^KS[13])           exp=0x67e3a831  got=0x67e3a831
+# [CHACHA_TB] @8290 ns | PASS  | CT[14] (0xDEADBEEF^KS[14])           exp=0x362e6e24  got=0x362e6e24
+# [CHACHA_TB] @8290 ns | PASS  | CT[15] (0xDEADBEEF^KS[15])           exp=0x9091ee4d  got=0x9091ee4d
+# 
+# [CHACHA_TB] @8290 ns | ================================================================
+# [CHACHA_TB] @8290 ns | INFO  | TEST 3: Counter Auto-Increment
+# [CHACHA_TB] @8290 ns | ================================================================
+# [CHACHA_TB] @8290 ns | INFO  | Purpose : COUNTER += 1 after each 64-byte block (RFC 8439 Section 2.4)
+# [CHACHA_TB] @8290 ns | CFG   | Initial Counter : 0x00000001
+# 
+# [CHACHA_TB] @8450 ns | INFO  | Trigger block 1 (COUNTER=1 before start)
+# [CHACHA_TB] @9010 ns | PASS  | Counter after block 1 (1->2)         exp=0x00000002  got=0x00000002
+# [CHACHA_TB] @9010 ns | INFO  | Trigger block 2 (COUNTER=2 before start)
+# [CHACHA_TB] @9650 ns | PASS  | Counter after block 2 (2->3)         exp=0x00000003  got=0x00000003
+# 
+# [CHACHA_TB] @9650 ns | ================================================================
+# [CHACHA_TB] @9650 ns | INFO  | TEST 4: IRQ Sticky Behaviour + W1C Clear
+# [CHACHA_TB] @9650 ns | ================================================================
+# [CHACHA_TB] @9650 ns | INFO  | Purpose   : IRQ_STATUS[0] set on completion, sticky until W1C
+# [CHACHA_TB] @9650 ns | INFO  | Mechanism : irq_done_q set by core_valid, cleared by writing 1
+# 
+# [CHACHA_TB] @9650 ns | CFG   | Write IRQ_STATUS <- 0x1  (W1C pre-clear)
+# [CHACHA_TB] @9810 ns | PASS  | IRQ_STATUS after W1C pre-clear       exp=0x00000000  got=0x00000000
+# [CHACHA_TB] @9810 ns | INFO  | Trigger encryption block (COUNTER <- 1)
+# [CHACHA_TB] @10530 ns | PASS  | IRQ_STATUS after block done (=1)     exp=0x00000001  got=0x00000001
+# [CHACHA_TB] @10530 ns | INFO  | Re-read IRQ_STATUS -- should remain sticky=1
+# [CHACHA_TB] @10610 ns | PASS  | IRQ_STATUS sticky re-read            exp=0x00000001  got=0x00000001
+# [CHACHA_TB] @10610 ns | CFG   | Write IRQ_STATUS <- 0x1  (W1C clear)
+# [CHACHA_TB] @10770 ns | PASS  | IRQ_STATUS after W1C clear           exp=0x00000000  got=0x00000000
+# 
+# [CHACHA_TB] @10770 ns | ================================================================
+# [CHACHA_TB] @10770 ns | INFO  | TEST 5: Register Read-Back
+# [CHACHA_TB] @10770 ns | ================================================================
+# [CHACHA_TB] @10770 ns | INFO  | Purpose : Verify TL-UL register interface read/write integrity
+# 
+# [CHACHA_TB] @10770 ns | CFG   | Write KEY0    <- 0xCAFEBABE
+# [CHACHA_TB] @10930 ns | PASS  | KEY[0] readback (wr 0xCAFEBABE)      exp=0xcafebabe  got=0xcafebabe
+# [CHACHA_TB] @10930 ns | CFG   | Write NONCE1  <- 0x12345678
+# [CHACHA_TB] @11090 ns | PASS  | NONCE[1] readback (wr 0x12345678)    exp=0x12345678  got=0x12345678
+# [CHACHA_TB] @11090 ns | CFG   | Write COUNTER <- 0x0000FFFF
+# [CHACHA_TB] @11250 ns | PASS  | COUNTER readback (wr 0x0000FFFF)     exp=0x0000ffff  got=0x0000ffff
+# [CHACHA_TB] @11250 ns | INFO  | Read CONTROL   (self-clearing, expect 0)
+# [CHACHA_TB] @11330 ns | PASS  | CONTROL always reads 0               exp=0x00000000  got=0x00000000
+# [CHACHA_TB] @11330 ns | INFO  | Read STATUS    (bit[0]=ready, expect 1 when idle)
+# [CHACHA_TB] @11410 ns | PASS  | STATUS[0]=ready when idle            exp=0x00000001  got=0x00000001
+# 
+# [CHACHA_TB] @11510 ns | ################################################################
+# [CHACHA_TB] @11510 ns | #                    FINAL TEST SUMMARY                        #
+# [CHACHA_TB] @11510 ns | ################################################################
+# [CHACHA_TB] @11510 ns | #                                                              #
+# [CHACHA_TB] @11510 ns | #   Total Checks : 43                                         #
+# [CHACHA_TB] @11510 ns | #   Passed       : 43                                         #
+# [CHACHA_TB] @11510 ns | #   Failed       : 0                                          #
+# [CHACHA_TB] @11510 ns | #                                                              #
+# [CHACHA_TB] @11510 ns | #   Result: *** ALL TESTS PASSED ***                          #
+# [CHACHA_TB] @11510 ns | #                                                              #
+# [CHACHA_TB] @11510 ns | #   Simulation Time : 11510 ns                                   #
+# [CHACHA_TB] @11510 ns | #                                                              #
+# [CHACHA_TB] @11510 ns | #   Test Breakdown:                                            #
+# [CHACHA_TB] @11510 ns | #     T1 Keystream Verification  : verified (16 words vs RFC)  #
+# [CHACHA_TB] @11510 ns | #     T2 Encryption XOR          : verified (16 words)         #
+# [CHACHA_TB] @11510 ns | #     T3 Counter Auto-Increment  : verified (2 steps)          #
+# [CHACHA_TB] @11510 ns | #     T4 IRQ Sticky + W1C        : verified (4 checks)         #
+# [CHACHA_TB] @11510 ns | #     T5 Register Read-Back      : verified (5 regs)           #
+# [CHACHA_TB] @11510 ns | #                                                              #
+# [CHACHA_TB] @11510 ns | ################################################################
+# 
+# ** Note: $finish    : ../000_tlul/chacha20/chacha20_tb.sv(581)
+#    Time: 11510 ns  Iteration: 1  Instance: /chacha20_tb
+# End time: 22:23:33 on Mar 31,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 3

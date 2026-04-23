@@ -1,0 +1,8 @@
+-sv
+-timescale 1ns/100ps
+
+# AEAD ChaCha20-Poly1305 encrypt/decrypt round-trip (RFC 8439 §2.8)
+../000_tlul/chacha20/chacha20_qr.sv
+../000_tlul/chacha20/chacha20_core.sv
+../000_tlul/poly1305/poly1305_core.sv
+../000_tlul/tb/aead_chacha20_poly1305_tb.sv

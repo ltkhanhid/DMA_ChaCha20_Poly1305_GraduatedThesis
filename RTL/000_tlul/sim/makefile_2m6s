@@ -1,0 +1,140 @@
+# =================================================================
+# Makefile for SoC 2-Master 6-Slave Comprehensive Testbench
+# =================================================================
+QUESTA_PATH = C:/questasim64_2024.1/win64
+VLOG        = $(QUESTA_PATH)/vlog
+VSIM        = $(QUESTA_PATH)/vsim
+
+# Flags
+VLOG_FLAGS  = -sv -timescale 1ns/1ps +access+rwc +incdir+..
+VSIM_FLAGS  = -voptargs="+acc" -wlf vsim.wlf
+
+# Directories
+SRC_DIR     = ../../00_src
+RTL_DIR     = ..
+TB_DIR      = ../tb
+
+# =================================================================
+# SOURCE FILES - 2M6S SOC
+# =================================================================
+PKG_SOURCES = \
+    $(RTL_DIR)/tlul_pkg.sv
+
+# CPU Core sources
+CPU_SOURCES = \
+    $(SRC_DIR)/pc.sv \
+    $(SRC_DIR)/PCplus4.sv \
+    $(SRC_DIR)/IF.sv \
+    $(SRC_DIR)/IF_ID_reg.sv \
+    $(SRC_DIR)/regfile.sv \
+    $(SRC_DIR)/immgen.sv \
+    $(SRC_DIR)/control_logic.sv \
+    $(SRC_DIR)/ID.sv \
+    $(SRC_DIR)/fa.sv \
+    $(SRC_DIR)/cla_4bit.sv \
+    $(SRC_DIR)/cla_32bit.sv \
+    $(SRC_DIR)/alu.sv \
+    $(SRC_DIR)/brc.sv \
+    $(SRC_DIR)/mux2.sv \
+    $(SRC_DIR)/mux3.sv \
+    $(SRC_DIR)/mux4.sv \
+    $(SRC_DIR)/mux4_fw.sv \
+    $(SRC_DIR)/EX.sv \
+    $(SRC_DIR)/hazard_detection.sv \
+    $(SRC_DIR)/forwarding_unit.sv \
+    $(SRC_DIR)/branch_predictor.sv \
+    $(SRC_DIR)/MEM.sv \
+    $(SRC_DIR)/mux3_wb.sv \
+    $(SRC_DIR)/WB.sv \
+    $(SRC_DIR)/memory.sv \
+    $(SRC_DIR)/SevenSegment.sv \
+    $(SRC_DIR)/peripherals.sv
+
+# TileLink CPU extensions
+TL_CPU_SOURCES = \
+    $(RTL_DIR)/ID_EX_reg_tl.sv \
+    $(RTL_DIR)/EX_MEM_reg_tl.sv \
+    $(RTL_DIR)/MEM_WB_reg_tl.sv \
+    $(RTL_DIR)/hazard_detection_tl.sv \
+    $(RTL_DIR)/MEM_tl.sv \
+    $(RTL_DIR)/pipelined_tl.sv
+
+# TileLink Infrastructure
+TL_INFRA_SOURCES = \
+    $(RTL_DIR)/tlul_xbar_2m6s.sv \
+    $(RTL_DIR)/tlul_adapter_mem.sv \
+    $(RTL_DIR)/tlul_adapter_peri.sv
+
+# Peripherals
+PERI_SOURCES = \
+    $(RTL_DIR)/uart_byte_tx.sv \
+    $(RTL_DIR)/uart_byte_rx.sv \
+    $(RTL_DIR)/tlul_uart_bridge.sv \
+    $(RTL_DIR)/spi_master.sv \
+    $(RTL_DIR)/tlul_spi.sv \
+    $(RTL_DIR)/i2c_master.sv \
+    $(RTL_DIR)/tlul_i2c.sv \
+    $(RTL_DIR)/tlul_dma.sv
+
+# Top Level
+TOP_SOURCES = \
+    $(RTL_DIR)/soc_top_2m6s.sv
+
+# Testbench
+TB_SOURCES = \
+    $(TB_DIR)/soc_comprehensive_tb.sv
+
+# All sources in order
+ALL_SOURCES = $(PKG_SOURCES) $(CPU_SOURCES) $(TL_CPU_SOURCES) $(TL_INFRA_SOURCES) $(PERI_SOURCES) $(TOP_SOURCES) $(TB_SOURCES)
+
+# =================================================================
+# TARGETS
+# =================================================================
+.PHONY: all compile sim gui clean help
+
+all: sim
+
+# Generate file list
+gen_flist:
+	@echo ======== GENERATING FILE LIST ========
+	@if exist soc_2m6s.f del /q soc_2m6s.f
+	@for %%f in ($(ALL_SOURCES)) do @echo %%f >> soc_2m6s.f
+
+# Compile only
+compile: gen_flist
+	@echo.
+	@echo ======== COMPILING 2M6S SOC ========
+	$(VLOG) $(VLOG_FLAGS) -f soc_2m6s.f
+	@echo.
+	@echo ======== COMPILATION COMPLETE ========
+
+# Run simulation (batch mode)
+sim: compile
+	@echo.
+	@echo ======== RUNNING COMPREHENSIVE TESTBENCH ========
+	$(VSIM) -c soc_comprehensive_tb $(VSIM_FLAGS) -l sim_comprehensive.log -do "log -r /*; run -all; quit -f"
+	@echo.
+	@echo ======== SIMULATION COMPLETE ========
+	@echo Check sim_comprehensive.log for results
+
+# Run with GUI
+gui: compile
+	@echo.
+	@echo ======== OPENING GUI ========
+	$(VSIM) -gui soc_comprehensive_tb $(VSIM_FLAGS) -do "log -r /*; add wave -r /*"
+
+# Clean
+clean:
+	@echo ======== CLEANING ========
+	-@del /f /q *.wlf *.log *.vcd *.f transcript 2>nul
+	-@if exist work rmdir /s /q work
+
+# Help
+help:
+	@echo.
+	@echo Available targets:
+	@echo   make compile  - Compile all sources
+	@echo   make sim      - Run batch simulation
+	@echo   make gui      - Run with GUI
+	@echo   make clean    - Clean build files
+	@echo.

@@ -1,0 +1,56 @@
+﻿vsim -c -voptargs="+acc" -do "run -all; quit -f" soc_aead_tb 
+** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+** Warning: ../000_tlul/tb/soc_aead_tb.sv(635): (vopt-2244) Variable 'ref_fail' is implicitly static. You must either explicitly declare it as static or automatic
+// owned by Siemens Industry Software Inc. or its affiliates (collectively,
+// "SISW"), or its licensors. Access to and use of this information is strictly
+Loading work.hazard_detection_tl(fast)
+run -all
+AEAD CHACHA20-POLY1305  SoC Demo  (RFC 8439 Section 2.8)
+AEAD Flow: OTK(ctr=0) -> Encrypt(ctr=1) -> MAC(6 blocks) -> Tag
+UART: 115200 baud | TX: 80 bytes (64 CT + 16 TAG)
+--- Computing reference AEAD values (parallel with DUT) ---
+[REF] Tag = 5ee9a3251c0d9f44e3441f81898d7257
+[6153350000] All 64 plaintext bytes sent. Duration: 6110720 ns
+[UART-CAP] byte[ 0]: 0xd3   (CT)
+[UART-CAP] byte[ 1]: 0x1a   (CT)
+[UART-CAP] byte[ 2]: 0x8d   (CT)
+[UART-CAP] byte[ 3]: 0x34   (CT)
+[UART-CAP] ... capturing CT bytes 4-59 ...
+[UART-CAP] byte[16]: 0xa4   (CT)
+[UART-CAP] byte[32]: 0x3d   (CT)
+[UART-CAP] byte[48]: 0x1a   (CT)
+[UART-CAP] byte[60]: 0x7e   (CT)
+[UART-CAP] byte[61]: 0xcd   (CT)
+[UART-CAP] byte[62]: 0x3b   (CT)
+[UART-CAP] byte[63]: 0x36   (CT)
+[UART-CAP] byte[64]: 0x57  (TAG)
+[UART-CAP] byte[65]: 0x72  (TAG)
+[UART-CAP] byte[66]: 0x8d  (TAG)
+[UART-CAP] byte[67]: 0x89  (TAG)
+[UART-CAP] byte[68]: 0x81  (TAG)
+[UART-CAP] byte[69]: 0x1f  (TAG)
+[UART-CAP] byte[70]: 0x44  (TAG)
+[UART-CAP] byte[71]: 0xe3  (TAG)
+[UART-CAP] byte[72]: 0x44  (TAG)
+[UART-CAP] byte[73]: 0x9f  (TAG)
+[UART-CAP] byte[74]: 0x0d  (TAG)
+[UART-CAP] byte[75]: 0x1c  (TAG)
+[UART-CAP] byte[76]: 0x25  (TAG)
+[UART-CAP] byte[77]: 0xa3  (TAG)
+[UART-CAP] byte[78]: 0xe9  (TAG)
+[UART-CAP] byte[79]: 0x5e  (TAG)
+[13144450000] All 80 bytes captured from UART TX.
+TAG (16 bytes):
+Ciphertext vs RFC 8439 Section 2.8.2 expected (first 64 bytes):
+All 64 ciphertext bytes match RFC expected values.
+Tag vs reference model:
+SoC tag = 5ee9a3251c0d9f44e3441f81898d7257
+Ref tag = 5ee9a3251c0d9f44e3441f81898d7257
+Tag MATCH!
+Expected  : d3 1a 8d 34 64 8e 60 db 7b 86 af bc 53 ef 7e c2
+RESULT: CT 64/64 PASS  |  TAG 1/1 PASS  >>> ALL CORRECT <<<
+1. ChaCha20(key,nonce,ctr=0) -> OTK generation
+3. ChaCha20(key,nonce,ctr=1) XOR PT -> ciphertext
+4. Poly1305 MAC(AAD|pad|CT|lengths) -> finalize -> tag
+Firmware -> UART TX -> Host (64B CT + 16B TAG)

@@ -1,0 +1,32 @@
+# Current time Wed Mar 25 22:20:03 2026
+# Program = vish
+# Id = "2024.1"
+# Version = "2024.02"
+# Date = "Feb  1 2024"
+# Platform = win64
+
+Exception c0000005 has occurred at address 1402dc50f. Traceback:
+# 0    0x1402dc50f: 'Mtirpc_Init + 0x13124f'
+# 1    0x1402cb750: 'Mtirpc_Init + 0x120490'
+# 2    0x1402a8fd5: 'Mtirpc_Init + 0xfdd15'
+# 3    0x140290d76: 'Mtirpc_Init + 0xe5ab6'
+# 4    0x140290ebd: 'Mtirpc_Init + 0xe5bfd'
+# 5    0x14018282d: '<unknown (@0x14018282d)>'
+# 6    0x56576872: 'TclInvokeStringCommand + 0xc2'
+# 7    0x56578bfc: 'TclNRRunCallbacks + 0x5c'
+# 8    0x5657a501: 'Tcl_EvalEx + 0xb01'
+# 9    0x5657aac8: 'Tcl_Eval + 0x38'
+# 10   0x1401a2796: '<unknown (@0x1401a2796)>'
+# 11   0x56576872: 'TclInvokeStringCommand + 0xc2'
+# 12   0x56578bfc: 'TclNRRunCallbacks + 0x5c'
+# 13   0x5657a501: 'Tcl_EvalEx + 0xb01'
+# 14   0x5661a1a1: 'Tcl_FSEvalFileEx + 0x1f1'
+# 15   0x5643d7e0: 'Tk_MainEx + 0x7a0'
+# 16   0x1401cfcf2: 'Mtirpc_Init + 0x24a32'
+# 17   0x1401d2f01: 'Mtirpc_Init + 0x27c41'
+# 18   0x14098e7b0: 'Tclsqlite3_Init + 0x1e210'
+# 19   0x7ffa1039e8d7: 'BaseThreadInitThunk + 0x17'
+# 20   0x7ffa112ec48c: 'RtlUserThreadStart + 0x2c'
+StackWalk failed 0
+# End of Stack Trace
+

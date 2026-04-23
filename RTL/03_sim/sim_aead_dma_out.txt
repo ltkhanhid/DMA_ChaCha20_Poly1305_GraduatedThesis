@@ -1,0 +1,167 @@
+﻿Reading pref.tcl
+
+# 2024.1
+
+# vsim -c -voptargs="+acc" -do "run -all; quit -f" soc_aead_dma_tb 
+# Start time: 22:15:44 on Mar 31,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Note: (vopt-143) Recognized 1 FSM in module "tlul_xbar_2m6s(fast)".
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(10): (vopt-13314) Defaulting port 'key_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../000_tlul/chacha20/chacha20_core.sv(11): (vopt-13314) Defaulting port 'nonce_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vopt-143) Recognized 1 FSM in module "chacha20_core(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "tlul_host_adapter(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "poly1305_core(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_tlul_master(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "dma_channel(fast__1)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "tlul_adapter_mem(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "uart_rx_8bit(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "uart_tx_8bit(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tlul_pkg(fast)
+# Loading work.soc_aead_dma_tb(fast)
+# Loading work.soc_top_2m6s(fast)
+# Loading work.pipelined_tl(fast)
+# Loading work.IF(fast)
+# Loading work.PCplus4(fast)
+# Loading work.pc(fast)
+# Loading work.instr_mem(fast)
+# Loading work.IF_ID_reg(fast)
+# Loading work.ID(fast)
+# Loading work.regfile(fast)
+# Loading work.ImmGen(fast)
+# Loading work.control_logic(fast)
+# Loading work.ID_EX_reg_tl(fast)
+# Loading work.EX(fast)
+# Loading work.mux2(fast)
+# Loading work.mux4_fw(fast)
+# Loading work.alu(fast)
+# Loading work.brc(fast)
+# Loading work.EX_MEM_reg_tl(fast)
+# Loading work.MEM_tl(fast)
+# Loading work.tlul_host_adapter(fast)
+# Loading work.MEM_WB_reg_tl(fast)
+# Loading work.WB(fast)
+# Loading work.mux3_wb(fast)
+# Loading work.hazard_detection_tl(fast)
+# Loading work.forwarding_unit(fast)
+# Loading work.tlul_xbar_2m6s(fast)
+# Loading work.tlul_adapter_mem(fast)
+# Loading work.memory(fast)
+# Loading work.tlul_adapter_peri(fast)
+# Loading work.peripherals(fast)
+# Loading work.SevenSegment(fast)
+# Loading work.tlul_uart_bridge(fast)
+# Loading work.uart_tx_8bit(fast)
+# Loading work.uart_rx_8bit(fast)
+# Loading work.tlul_dma(fast)
+# Loading work.dma_controller(fast)
+# Loading work.dma_channel(fast)
+# Loading work.dma_channel(fast__1)
+# Loading work.dma_arbiter(fast)
+# Loading work.dma_tlul_master(fast)
+# Loading work.tlul_chacha20(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# Loading work.tlul_poly1305(fast)
+# Loading work.poly1305_core(fast)
+# Loading work.soc_top_2m6s(fast__1)
+# Loading work.pipelined_tl(fast__1)
+# Loading work.IF(fast__1)
+# Loading work.instr_mem(fast__1)
+# run -all
+# 
+# ================================================================
+#  AEAD CHACHA20-POLY1305  Performance Comparison: CPU vs DMA
+# ================================================================
+# 
+#  PARAMETERS (RFC 8439 Section 2.8.2):
+#    Key   : 80 81 82 83 84 85 86 87 88 89 8a 8b 8c 8d 8e 8f
+#            90 91 92 93 94 95 96 97 98 99 9a 9b 9c 9d 9e 9f
+#    Nonce : 07 00 00 00 40 41 42 43 44 45 46 47
+#    AAD   : 50 51 52 53 c0 c1 c2 c3 c4 c5 c6 c7  (12 bytes)
+#    PT    : "Ladies and Gentlemen of the class of '99: If I co"
+#            "uld offer you o"  (64 bytes)
+# 
+#  SoC A: CPU-only   (demo_aead.hex)
+#  SoC B: DMA-assist (demo_aead_dma.hex)
+# ================================================================
+# 
+# [390000] Reset released Γ?? both SoCs running in parallel.
+# 
+# --- Sending 64 plaintext bytes via shared UART ---
+# [6151110000] All 64 bytes sent.
+# 
+# --- Waiting for AEAD processing + UART TX ---
+# [13342110000] Both SoCs completed.
+# 
+# ================================================================
+#  CORRECTNESS VERIFICATION
+# ================================================================
+#   SoC A CT vs RFC 8439: 64/64 PASS
+#   SoC B CT vs RFC 8439: 64/64 PASS
+#   A vs B CT:     MATCH
+#   SoC A Tag: 5ee9a3251c0d9f44e3441f81898d7257
+#   SoC B Tag: 5ee9a3251c0d9f44e3441f81898d7257
+#   A vs B Tag:    MATCH
+# 
+# ================================================================
+#  PERFORMANCE COMPARISON  (Phase 2-5: Crypto Processing Only)
+# ================================================================
+# 
+#   Phase Breakdown (clock cycles):
+#   +----------+----------------------------+----------------------------+
+#   |  Phase   |  SoC A (CPU-only)          |  SoC B (DMA-assisted)      |
+#   +----------+----------------------------+----------------------------+
+#   |  P2 OTK  |    122 cyc /    52 insn   |    122 cyc /    52 insn   |
+#   |  P3 Init |     82 cyc /    20 insn   |    109 cyc /    44 insn   |
+#   |  P4 Enc  |    532 cyc /   217 insn   |    332 cyc /   117 insn   |
+#   |  P5 MAC  |    451 cyc /   154 insn   |    417 cyc /   145 insn   |
+#   +----------+----------------------------+----------------------------+
+# 
+#   Summary (Phase 2 Γ?? Phase 6):
+#   +---------------------+-----------+-----------+---------------+
+#   |  Metric             |  CPU-only | DMA-assist| Change        |
+#   +---------------------+-----------+-----------+---------------+
+#   |  Total Cycles       |      1187 |       980 |   17.4%       |
+#   |  CPU Instructions   |       443 |       358 | -19.2% saved  |
+#   |  IPC                |     0.373 |     0.365 |               |
+#   +---------------------+-----------+-----------+---------------+
+# 
+#   Analysis:
+#     - DMA saved 85 CPU instructions (19.2% reduction)
+#     - DMA also reduced total cycles by 17.4%
+#     - Lower IPC for DMA = CPU idle during DMA transfers
+#       (CPU freed for other tasks in real applications)
+# 
+# ================================================================
+#  RESULT: ALL CORRECT
+#    Both SoCs produce identical, RFC-compliant output.
+#    CPU instructions saved with DMA: 85 (19.2%)
+# ================================================================
+# 
+# ** Note: $stop    : ../000_tlul/tb/soc_aead_dma_tb.sv(592)
+#    Time: 13342110 ns  Iteration: 1  Instance: /soc_aead_dma_tb
+# Break in Module soc_aead_dma_tb at ../000_tlul/tb/soc_aead_dma_tb.sv line 592
+# Stopped at ../000_tlul/tb/soc_aead_dma_tb.sv line 592
+#  quit -f
+# End time: 22:16:06 on Mar 31,2026, Elapsed time: 0:00:22
+# Errors: 0, Warnings: 3

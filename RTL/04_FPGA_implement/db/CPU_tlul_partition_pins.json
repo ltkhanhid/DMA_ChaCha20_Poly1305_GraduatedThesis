@@ -1,0 +1,273 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "ledr_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[8]",
+					"strict" : false
+				},
+				{
+					"name" : "ledr_o[9]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hex0_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hex1_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hex2_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hex3_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hex4_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hex5_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "uart_tx_o",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[0]",
+					"strict" : false
+				},
+				{
+					"name" : "rst_n",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[7]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[8]",
+					"strict" : false
+				},
+				{
+					"name" : "sw_i[9]",
+					"strict" : false
+				},
+				{
+					"name" : "uart_rx_i",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

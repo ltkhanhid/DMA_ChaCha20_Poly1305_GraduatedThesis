@@ -1,0 +1,96 @@
+module IF(
+    input logic i_clk,
+    input logic i_reset, 
+    input logic i_pc_en, // PC enable from ID
+    
+    // Misprediction Detection Inputs
+    input logic [31:0] i_pc_id, // PC of instruction currently in ID
+    output logic o_flush,       // Flush signal to pipeline
+
+    // Branch prediction inputs (Update from EX)
+    input logic        i_bp_update_en,      // Branch prediction update enable
+    input logic [31:0] i_bp_update_pc,      // PC of branch to update
+    input logic        i_bp_actual_taken,   // Actual branch outcome
+    input logic [31:0] i_bp_actual_target,  // Actual branch target
+    
+    output logic [31:0] o_pc_out,
+    output logic [31:0] o_instr,
+    output logic        o_bp_prediction,    // Branch prediction
+    output logic        o_bp_btb_hit        // BTB hit signal
+);
+
+    logic [31:0] pc_plus4; 
+    logic [31:0] i_pc_in;
+    logic [31:0] current_pc;
+    logic [31:0] pc_delayed;
+    
+    // Branch prediction signals
+    logic        bp_prediction;
+    logic [31:0] bp_target_pc;
+    logic        bp_btb_hit;
+    logic        is_branch_if;
+    logic [31:0] next_pc_from_bp;
+    
+    // Detect if current instruction is a branch (opcode == 7'b1100011) or JAL (opcode == 7'b1101111) or JALR (opcode == 7'b1100111)
+    assign is_branch_if = ~(|(o_instr[6:0] ^ 7'b1100011)) || ~(|(o_instr[6:0] ^ 7'b1101111)) || ~(|(o_instr[6:0] ^ 7'b1100111));
+    
+    // Branch Predictor instance
+    branch_predictor #(
+        .BPT_SIZE(1024),
+        .BTB_SIZE(1024)
+    ) bp (
+        .i_clk(i_clk),
+        .i_reset(i_reset),
+        // Prediction interface
+        .i_pc_if(current_pc),
+        .i_is_branch_if(is_branch_if),
+        .o_prediction(bp_prediction),
+        .o_target_pc(bp_target_pc),
+        .o_btb_hit(bp_btb_hit),
+        // Update interface
+        .i_update_en(i_bp_update_en),
+        .i_update_pc(i_bp_update_pc),
+        .i_actual_taken(i_bp_actual_taken),
+        .i_actual_target(i_bp_actual_target),
+        // Misprediction interface
+        .i_pc_id(i_pc_id),
+        .o_flush(o_flush),
+        .o_next_pc(next_pc_from_bp)
+    );
+    
+    // Output branch prediction signals
+    assign o_bp_prediction = bp_prediction;
+    assign o_bp_btb_hit = bp_btb_hit;
+    
+    // Next PC comes directly from Branch Predictor (which handles both prediction and recovery)
+    assign i_pc_in = next_pc_from_bp;
+
+PCplus4 PCplus4(
+    .PCout(current_pc),
+    .PCplus4(pc_plus4) // PC+4
+    );
+    
+pc pc(
+    .i_clk(i_clk),
+    .i_reset(i_reset),
+    .i_pc_in(i_pc_in), 
+    .i_pc_en(i_pc_en), 
+    .o_pc_out(current_pc) 
+);
+instr_mem IMem(
+    .i_clk(i_clk),
+    .i_imem_addr(current_pc), 
+    .o_instr(o_instr) 
+);
+
+    always_ff @(posedge i_clk or negedge i_reset) begin
+        if (!i_reset) begin
+            pc_delayed <= 32'b0;
+        end else if (i_pc_en) begin
+            pc_delayed <= current_pc;
+        end
+    end
+
+    assign o_pc_out = current_pc;
+
+endmodule

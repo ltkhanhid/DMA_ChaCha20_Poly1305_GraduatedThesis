@@ -1,0 +1,88 @@
+# vsim -c soc_7seg_tb -voptargs="+acc" -l 7seg_log.txt -do "run -all; quit -f" 
+# Start time: 10:00:41 on Mar 01,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.tlul_pkg(fast)
+# Loading work.soc_7seg_tb(fast)
+# Loading work.soc_top_2m6s(fast)
+# Loading work.pipelined_tl(fast)
+# Loading work.IF(fast)
+# Loading work.PCplus4(fast)
+# Loading work.pc(fast)
+# Loading work.instr_mem(fast)
+# Loading work.IF_ID_reg(fast)
+# Loading work.ID(fast)
+# Loading work.regfile(fast)
+# Loading work.ImmGen(fast)
+# Loading work.control_logic(fast)
+# Loading work.ID_EX_reg_tl(fast)
+# Loading work.EX(fast)
+# Loading work.mux2(fast)
+# Loading work.mux4_fw(fast)
+# Loading work.alu(fast)
+# Loading work.cla_32bit(fast)
+# Loading work.cla_4bit(fast)
+# Loading work.fa(fast)
+# Loading work.brc(fast)
+# Loading work.EX_MEM_reg_tl(fast)
+# Loading work.MEM_tl(fast)
+# Loading work.tlul_host_adapter(fast)
+# Loading work.MEM_WB_reg_tl(fast)
+# Loading work.WB(fast)
+# Loading work.mux3_wb(fast)
+# Loading work.hazard_detection_tl(fast)
+# Loading work.forwarding_unit(fast)
+# Loading work.tlul_xbar_2m6s(fast)
+# Loading work.tlul_adapter_mem(fast)
+# Loading work.memory(fast)
+# Loading work.tlul_adapter_peri(fast)
+# Loading work.peripherals(fast)
+# Loading work.SevenSegment(fast)
+# Loading work.tlul_uart_bridge(fast)
+# Loading work.uart_tx_8bit(fast)
+# Loading work.uart_rx_8bit(fast)
+# Loading work.tlul_spi(fast)
+# Loading work.spi_master(fast)
+# Loading work.tlul_i2c(fast)
+# Loading work.i2c_master(fast)
+# Loading work.tlul_dma(fast)
+# Loading work.dma_controller(fast)
+# Loading work.dma_channel(fast)
+# Loading work.dma_channel(fast__1)
+# Loading work.dma_arbiter(fast)
+# Loading work.dma_tlul_master(fast)
+# Loading work.tlul_chacha20(fast)
+# Loading work.chacha20_core(fast)
+# Loading work.chacha20_qr(fast)
+# Loading work.tlul_poly1305(fast)
+# Loading work.poly1305_core(fast)
+# run -all
+# === SOC UART 7-SEG TEST (WITH BAUD CHECK) ===
+# [390000] Reset Released
+# 
+# --- TEST 1: Normal Operation (115200 Baud) ---
+#   [10000390000] TX -> SOC (Baud Cycles: 434): 0x31 ('1')
+# 	Display: [ 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 ]
+# 
+# --- TEST 2: Wrong Baud Rate (9600 Baud) - Should Fail ---
+#   [20095870000] TX -> SOC (Baud Cycles: 5208): 0x32 ('2')
+# Break key hit
+# Simulation stop requested.
+# Stopped at ../00_src/cla_32bit.sv line 22
+#  quit -f
+# End time: 10:01:10 on Mar 01,2026, Elapsed time: 0:00:29
+# Errors: 0, Warnings: 0
